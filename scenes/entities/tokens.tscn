@@ -1,0 +1,117 @@
+[gd_scene format=3 uid="uid://c5l32mvgwdfdc"]
+
+[ext_resource type="Script" uid="uid://doaj71u5t7sbh" path="res://scripts/tokens.gd" id="1_nocmf"]
+[ext_resource type="PackedScene" uid="uid://d0uq4tdum7cfk" path="res://glb/tokens/Meshy_AI_Solar_Lattice_Orb_0602134435_texture.glb" id="2_2pq36"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_6wmse"]
+height = 0.025
+radius = 0.2
+
+[sub_resource type="Animation" id="Animation_6xwmf"]
+length = 0.001
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:rotation:y")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_ktomo"]
+resource_name = "floating"
+length = 3.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = false
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.5666667, 3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0.11261949, 0), Vector3(0, 0, 0)]
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = false
+tracks/1/path = NodePath(".:rotation:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0, -0.33333334, 0, 0, 0),
+"times": PackedFloat32Array(0, 3)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = false
+tracks/2/path = NodePath(".:rotation:y")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, -6.2831855, -0.33333334, 1.0471976, 0, 0),
+"times": PackedFloat32Array(0, 3)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_teton"]
+_data = {
+&"RESET": SubResource("Animation_6xwmf"),
+&"floating": SubResource("Animation_ktomo")
+}
+
+[node name="tokens" type="Area3D" unique_id=1033267743]
+collision_layer = 16
+collision_mask = 2
+script = ExtResource("1_nocmf")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1021044731]
+transform = Transform3D(-4.3711385e-08, -0.99999994, -1.7484555e-07, 0.99999994, -4.3711385e-08, 0, -7.642741e-15, -1.7484554e-07, 1, 0, 0, 0)
+shape = SubResource("CylinderShape3D_6wmse")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=196620302]
+root_node = NodePath("")
+libraries/ = SubResource("AnimationLibrary_teton")
+autoplay = &"floating"
+
+[node name="Visuals" type="Node3D" parent="." unique_id=1064858568]
+transform = Transform3D(-4.3711385e-08, -0.9999999, 0, 0.9999999, -4.3711385e-08, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="Meshy_AI_Solar_Lattice_Orb_0602134435_texture" parent="Visuals" unique_id=906366922 instance=ExtResource("2_2pq36")]
+transform = Transform3D(0.25, 8.881784e-16, 0, -8.881784e-16, 0.25, 0, 0, 0, 0.25, -1.3827204e-08, 0.024569277, 0.001922667)
+
+[node name="Label3D" type="Label3D" parent="Visuals/Meshy_AI_Solar_Lattice_Orb_0602134435_texture" unique_id=93321483]
+transform = Transform3D(-1.7484554e-07, 3.9999998, -1.4210855e-14, 1.7484554e-07, 0, -4, -3.9999998, -1.7484554e-07, -1.7484555e-07, -1.2, -0.09827711, -0.007690668)
+billboard = 2
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

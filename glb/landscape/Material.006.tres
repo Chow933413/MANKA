@@ -1,0 +1,8 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://doug6afsytmhn"]
+
+[ext_resource type="Texture2D" uid="uid://bmw5oblri2gfv" path="res://glb/landscape/landscape_ChatGPT Image Jun 2, 2026, 01_17_39 PM.png" id="1_j508n"]
+
+[resource]
+resource_name = "Material.006"
+cull_mode = 2
+albedo_texture = ExtResource("1_j508n")

@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://bw1s1w6gjo4o0"]
+
+[ext_resource type="PackedScene" uid="uid://dr0bk6f6k1mym" path="res://glb/barrel/barrel.glb" id="1_oevig"]
+
+[node name="barrel" unique_id=2048607242 instance=ExtResource("1_oevig")]

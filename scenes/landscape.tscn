@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://dhngdpn2dr4qh"]
+
+[ext_resource type="PackedScene" uid="uid://db628fdgtcuvq" path="res://glb/landscape/landscape.glb" id="1_ic8c6"]
+[ext_resource type="Material" uid="uid://birr174tiy7d1" path="res://glb/landscape/Material.002.tres" id="2_rw4f8"]
+
+[node name="landscape" unique_id=302519496 instance=ExtResource("1_ic8c6")]
+
+[node name="path-cross_001" parent="." index="15" unique_id=1197415179]
+material_overlay = ExtResource("2_rw4f8")
+
+[node name="CollisionShape3D" parent="grass-block/StaticBody3D" parent_id_path=PackedInt32Array(1722032825) index="0" unique_id=470489752]
+debug_fill = false
+
+[node name="grass-block-side" parent="." index="17" unique_id=1381050680]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.17812312, 0.15953302)
+
+[node name="grass-block-corner" parent="." index="18" unique_id=2070887361]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0633295, 0.08256602, 0)

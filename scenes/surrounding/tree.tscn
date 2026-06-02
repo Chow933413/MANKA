@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://c6mkqjn60tnbc"]
+
+[ext_resource type="Texture2D" uid="uid://qu05b450ehb5" path="res://assets/textures/tree.png" id="1_x700n"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ai5yx"]
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 1
+alpha_antialiasing_edge = 0.3
+cull_mode = 2
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("1_x700n")
+texture_filter = 0
+
+[sub_resource type="QuadMesh" id="QuadMesh_12js5"]
+material = SubResource("StandardMaterial3D_ai5yx")
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_x700n"]
+radius = 0.07519531
+height = 0.8060303
+
+[node name="Tree" type="Node3D" unique_id=654564548]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=151139196]
+mesh = SubResource("QuadMesh_12js5")
+metadata/_edit_group_ = true
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=2003532386]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
+mesh = SubResource("QuadMesh_12js5")
+metadata/_edit_group_ = true
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=2047082619]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=546313464]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.019348145, 0)
+shape = SubResource("CapsuleShape3D_x700n")

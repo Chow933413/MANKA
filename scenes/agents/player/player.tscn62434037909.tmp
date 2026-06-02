@@ -1,0 +1,117 @@
+[gd_scene format=3 uid="uid://bfo0cmvi43eb6"]
+
+[ext_resource type="Script" uid="uid://bjh8kf2vdxh5g" path="res://scripts/player.gd" id="1_afts6"]
+[ext_resource type="Texture2D" uid="uid://d38xeo6xc7qx" path="res://assets/textures/player/WarriorWoman-Sheet.png" id="2_afts6"]
+[ext_resource type="Script" uid="uid://gjxgdanwxyhj" path="res://scripts/states/idle.gd" id="3_eje3e"]
+[ext_resource type="Script" uid="uid://iexn07873n1e" path="res://scripts/states/move.gd" id="4_qcst6"]
+[ext_resource type="Script" uid="uid://pvmko37k24ft" path="res://scripts/states/jump.gd" id="5_deemb"]
+[ext_resource type="Script" uid="uid://dhr4m1w78cbcd" path="res://scripts/states/fall.gd" id="6_tige2"]
+[ext_resource type="Script" uid="uid://drh4r6nrn8rli" path="res://scripts/states/attack.gd" id="7_mvh0q"]
+
+[sub_resource type="Animation" id="Animation_afts6"]
+resource_name = "Idle"
+loop_mode = 1
+step = 0.125
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.25, 0.375, 0.5, 0.625, 0.75, 0.875),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 0), Vector2i(1, 0), Vector2i(2, 0), Vector2i(3, 0), Vector2i(4, 0), Vector2i(5, 0), Vector2i(6, 0), Vector2i(7, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_qcst6"]
+resource_name = "Move"
+loop_mode = 1
+step = 0.125
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.25, 0.375, 0.5, 0.625, 0.75, 0.875),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 3), Vector2i(1, 3), Vector2i(2, 3), Vector2i(3, 3), Vector2i(4, 3), Vector2i(5, 3), Vector2i(6, 3), Vector2i(7, 3)]
+}
+
+[sub_resource type="Animation" id="Animation_eje3e"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5yufg"]
+_data = {
+&"Idle": SubResource("Animation_afts6"),
+&"Move": SubResource("Animation_qcst6"),
+&"RESET": SubResource("Animation_eje3e")
+}
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_mlbbj"]
+radius = 0.25390625
+height = 0.82910156
+
+[node name="Player" type="CharacterBody3D" unique_id=319351506 node_paths=PackedStringArray("state_machine")]
+script = ExtResource("1_afts6")
+state_machine = NodePath("LimboHSM")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1888793041]
+libraries/ = SubResource("AnimationLibrary_5yufg")
+
+[node name="Sprite3D" type="Sprite3D" parent="." unique_id=1608186276]
+pixel_size = 0.025
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("2_afts6")
+hframes = 16
+vframes = 25
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=501911463]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.04658568, -0.034072876, 0)
+shape = SubResource("CapsuleShape3D_mlbbj")
+
+[node name="Camera_controller" type="Node3D" parent="." unique_id=1044989768]
+top_level = true
+
+[node name="Camera_target" type="Node3D" parent="Camera_controller" unique_id=621530222]
+transform = Transform3D(1, 0, 0, 0, 0.99014145, 0.14007178, 0, -0.1400718, 0.99014133, 0, 0.25836718, 1.8829448)
+
+[node name="Camera3D" type="Camera3D" parent="Camera_controller/Camera_target" unique_id=231700000]
+
+[node name="LimboHSM" type="LimboHSM" parent="." unique_id=1012754462]
+
+[node name="Idle" type="LimboState" parent="LimboHSM" unique_id=1022839185 node_paths=PackedStringArray("animation_player")]
+script = ExtResource("3_eje3e")
+animation_player = NodePath("../../AnimationPlayer")
+animation = &"Idle"
+
+[node name="Move" type="LimboState" parent="LimboHSM" unique_id=1231780289 node_paths=PackedStringArray("animation_player")]
+script = ExtResource("4_qcst6")
+animation_player = NodePath("../../AnimationPlayer")
+animation = &"Move"
+
+[node name="Jump" type="LimboState" parent="LimboHSM" unique_id=1432633422]
+script = ExtResource("5_deemb")
+
+[node name="Fall" type="LimboState" parent="LimboHSM" unique_id=701351917]
+script = ExtResource("6_tige2")
+
+[node name="Attack" type="LimboState" parent="LimboHSM" unique_id=1180204537]
+script = ExtResource("7_mvh0q")
