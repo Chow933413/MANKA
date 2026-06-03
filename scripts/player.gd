@@ -41,9 +41,10 @@ var current_health_units: int = 14
 var is_dead: bool = false
 @onready var respawn_position: Vector3 = global_position
 
-# Knocback Settings
+# Knockback Settings
 @export_category("Knockback Settings")
 @export var knockback_force: float = 12.0
+@export var knockback_bounce: float = 4.0    # Vertical lift velocity when hurt
 @export var knockback_friction: float = 40.0 # How fast the slide slows down
 var knockback_velocity: Vector3 = Vector3.ZERO
 
@@ -68,11 +69,12 @@ func consume_tokens(token_a: String, token_b: String):
 	print("Tokens used. Remaining: ", inventory)
 
 func _input(event: InputEvent) -> void:
+	if DialogueManager.is_dialogue_active:return
 	# 1. Mouse Camera Rotation Logic
-	#if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED and controls_active:
-		# Horizontal rotation turns the actual player node 360 degrees
+	#if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED and controls_active and knockback_velocity == Vector3.ZERO:
+		## Horizontal rotation turns the actual player node 360 degrees
 		#rotate_y(deg_to_rad(-event.relative.x * sens_horizontal))
-		
+		#
 		## Vertical rotation modifies the camera mount pitch
 		#camera_pitch -= event.relative.y * sens_vertical
 		#camera_pitch = clamp(camera_pitch, min_pitch, max_pitch)
@@ -122,13 +124,13 @@ func _initialize_state_machine():
 	state_machine.add_transition(state_machine.ANYSTATE, locked_state, "to_locked")
 	state_machine.add_transition(locked_state, idle_state, "to_idle")
 	
-	
 	# Setup State Machine
 	state_machine.initial_state = idle_state
 	state_machine.initialize(self)
 	state_machine.set_active(true)
 
 func check_attack_input():
+	if DialogueManager.is_dialogue_active:return
 	if Input.is_action_just_pressed("attack"):
 		state_machine.dispatch("to_attack")
 
@@ -137,7 +139,6 @@ func update_sprite_direction():
 		sprite.flip_h = movement_input.x < 0
 
 func apply_movement(delta: float):
-	# Calculate directional vectors based on the character's current facing transform basis
 	var move_direction = (transform.basis * Vector3(movement_input.x, 0, movement_input.y)).normalized()
 	
 	if move_direction:
@@ -148,72 +149,69 @@ func apply_movement(delta: float):
 		velocity.z = move_toward(velocity.z, 0, SPEED)
 
 func _physics_process(delta: float) -> void:
-	state_machine.set_active(controls_active)
+	
+	if DialogueManager.is_dialogue_active:
+		velocity.x = 0
+		velocity.z = 0
+		state_machine.dispatch("to_idle")
+		move_and_slide()
+		return
+	
+	# Keep state machine active so it can process unfreeze dispatches
+	if state_machine:
+		state_machine.set_active(true)
 
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 		
-		
-	# 2. ALWAYS slow down the knockback force over time, no matter what state we are in!
+	# ALWAYS process and slow down knockback force over time
 	if knockback_velocity.length() > 0.1:
 		knockback_velocity = knockback_velocity.move_toward(Vector3.ZERO, knockback_friction * delta)
+		
+		# Override movement vectors to force the player backward through space!
 		velocity.x = knockback_velocity.x
 		velocity.z = knockback_velocity.z
 	else:
-		# Knockback has finished slowing down!
 		knockback_velocity = Vector3.ZERO
 		
-		# If the player is frozen in the locked state, force them back to idle
-		if state_machine.get_active_state() == locked_state:
-			state_machine.dispatch("to_idle")
+		# UNFREEZE TRIGGER: Regain control only when sliding stops and player is safely grounded
+		if state_machine and state_machine.get_active_state() == locked_state and not is_dead:
+			if is_on_floor():
+				controls_active = true
+				state_machine.dispatch("to_idle")
 
-	# 3. Handle state machine processing rules
-	# Turn off state machine processing *only* while actively flying backward
-	state_machine.set_active(controls_active and knockback_velocity == Vector3.ZERO)
-	
-	
-	if controls_active:
+	# Control tracking vector allocations
+	if controls_active and knockback_velocity == Vector3.ZERO:
 		movement_input = Input.get_vector("left", "right", "up", "down")
 	else:
 		movement_input = Vector2.ZERO
+		
 	move_and_slide()
 	
-	# Handle flipping hitboxes dynamically relative to the custom controls input direction
+	# Handle flipping hitboxes dynamically relative to input direction
 	if movement_input.x > 0:
 		$"Sword Hitbox".position.x = hitbox_position
 	elif movement_input.x < 0:
 		$"Sword Hitbox".position.x = -hitbox_position
 
-	# Camera Positioning Tracking
-	# Since Camera_controller is a child node, we handle its target spacing natively 
-	# without manually scrubbing position values that clash with mouse rotation.
-	# If you want it to softly lag behind, you can use lerp on global coordinates instead.
-
 func _on_sword_hitbox_body_entered(body: Node3D) -> void:
 	if body.has_method("take_damage"):
 		body.take_damage()
 
-
 func _on_hurt_box_area_entered(area: Area3D) -> void:
 	if is_dead: return
 	
-	
-	if area.name.to_lower() == "hitbox":
+	if area.name.to_lower().contains("hitbox") or area.is_in_group("deadly_hazard"):
+		var incoming_damage = 2 # Changed default to 2 units (1 full heart)
 		
-		# 1. DEFAULT DAMAGE: Start with a fallback of 2 units just in case
-		var incoming_damage = 1
-		
-		# 2. DYNAMIC DAMAGE: Check if the enemy hitbox has a custom damage variable
 		if "damage_units" in area:
 			incoming_damage = area.damage_units
 			print("Player hit by ", area.name, " dealing ", incoming_damage, " units!")
 		
-		# 3. Deduct the dynamic damage amount
 		current_health_units -= incoming_damage
 		current_health_units = clamp(current_health_units, 0, max_health * 2)
 		
-		# 4. Update the HUD
 		health_changed.emit(current_health_units)
 		
 		if current_health_units <= 0:
@@ -221,19 +219,25 @@ func _on_hurt_box_area_entered(area: Area3D) -> void:
 		else:
 			apply_knockback(area.global_position, knockback_force)
 		
-		
 func apply_knockback(source_position: Vector3, force: float = 12.0) -> void:
 	if is_dead: return
-	var push_direction: Vector3 = global_position - source_position
+	controls_active = false
 	
+	var push_direction: Vector3 = global_position - source_position
 	push_direction.y = 0
 	push_direction = push_direction.normalized()
+	
 	knockback_velocity = push_direction * force
+	
+	# Give the player a classic diagonal pop upward and backward simultaneously!
+	velocity.y = knockback_bounce
+	
 	var tween = create_tween()
 	tween.tween_property(sprite, "modulate", Color(1, 0, 0), 0.1)
 	tween.tween_property(sprite, "modulate", Color(1, 1, 1), 0.1)
 
-	state_machine.dispatch("to_locked")
+	if state_machine:
+		state_machine.dispatch("to_locked")
 
 func die() -> void:
 	is_dead = true
@@ -254,11 +258,11 @@ func respawn() -> void:
 	velocity = Vector3.ZERO
 	sprite.modulate = Color(1, 1, 1, 1)
 	
-	# CRITICAL: Reset the global tracking value back to full health for the respawned scene!
 	NavigationManager.saved_health_units = max_health * 2
-	
 	current_health_units = max_health * 2
-	health_changed.emit(current_health_units, max_health)
+	
+	# Fixed signature matching error block
+	health_changed.emit(current_health_units)
 	
 	state_machine.dispatch("to_idle")
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
@@ -268,4 +272,3 @@ func respawn() -> void:
 		NavigationManager.teleport_to_scene(NavigationManager.respawn_scene_path, NavigationManager.respawn_portal_id)
 	else:
 		get_tree().reload_current_scene()
-	

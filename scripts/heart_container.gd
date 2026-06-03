@@ -1,6 +1,6 @@
 extends HBoxContainer
 
-@onready var HeartGUIClass = preload("res://scenes/HUD/heart_gui.tscn")
+@onready var HeartGUIClass = preload("res://scenes/GUI/HUD/heart_gui.tscn")
 
 func setMaxHearts(max_health: int):
 	for child in get_children():

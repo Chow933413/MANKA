@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bnmfgos1j56vl"]
 
-[ext_resource type="PackedScene" uid="uid://cj0yp7aq2tptk" path="res://scenes/HUD/heart_container.tscn" id="1_qa1nh"]
+[ext_resource type="PackedScene" uid="uid://cj0yp7aq2tptk" path="res://scenes/GUI/HUD/heart_container.tscn" id="1_qa1nh"]
 [ext_resource type="Script" uid="uid://ywhx7visc47w" path="res://scripts/heart_hud.gd" id="1_yqo3l"]
 [ext_resource type="Texture2D" uid="uid://ursvjacwmyfl" path="res://assets/textures/HUD/HUD-Photoroom.png" id="2_yqo3l"]
 [ext_resource type="Texture2D" uid="uid://4dv57n0nhjvc" path="res://assets/textures/HUD/ChatGPT Image Jun 3, 2026 at 02_26_25 PM.png" id="3_g4vuw"]
