@@ -1,6 +1,6 @@
 extends CharacterBody3D
 
-
+signal health_changed
 
 # State Machine
 @export var state_machine : LimboHSM
@@ -29,6 +29,11 @@ var hitbox_position: float
 var movement_input: Vector2 = Vector2.ZERO
 var controls_active: bool = true
 var inventory: Array[String] = []
+
+# Health system
+@export var max_health: int = 7
+var current_health: int = max_health
+
 
 # Internal tracking for vertical mouse angle clamping
 var camera_pitch: float = 0.0
@@ -149,3 +154,12 @@ func _physics_process(delta: float) -> void:
 func _on_sword_hitbox_body_entered(body: Node3D) -> void:
 	if body.has_method("take_damage"):
 		body.take_damage()
+
+
+func _on_hurt_box_area_entered(area: Area3D) -> void:
+	if area.name == "hitbox":
+		current_health -= 1
+		if current_health < 0:
+			current_health = max_health
+			
+		health_changed.emit(current_health)

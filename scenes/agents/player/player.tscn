@@ -340,4 +340,12 @@ script = ExtResource("7_mvh0q")
 animation_player = NodePath("../../AnimationPlayer")
 animation = &"Attack"
 
+[node name="HurtBox" type="Area3D" parent="." unique_id=372367459]
+collision_layer = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HurtBox" unique_id=850109684]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.018380597, 0.048080444, 0)
+shape = SubResource("CapsuleShape3D_mvh0q")
+
 [connection signal="body_entered" from="Sword Hitbox" to="." method="_on_sword_hitbox_body_entered"]
+[connection signal="area_entered" from="HurtBox" to="." method="_on_hurt_box_area_entered"]

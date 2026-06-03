@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://bnmfgos1j56vl"]
+
+[ext_resource type="PackedScene" uid="uid://cj0yp7aq2tptk" path="res://scenes/HUD/heart_container.tscn" id="1_qa1nh"]
+[ext_resource type="Script" uid="uid://ywhx7visc47w" path="res://scripts/heart_hud.gd" id="1_yqo3l"]
+[ext_resource type="Texture2D" uid="uid://ursvjacwmyfl" path="res://assets/textures/HUD/HUD-Photoroom.png" id="2_yqo3l"]
+
+[node name="CanvasLayer" type="CanvasLayer" unique_id=1186888506]
+script = ExtResource("1_yqo3l")
+
+[node name="HeartContainer" parent="." unique_id=963020874 instance=ExtResource("1_qa1nh")]
+offset_left = 153.0
+offset_top = 73.0
+offset_right = 278.0
+offset_bottom = 113.0
+scale = Vector2(3.18, 3)
+theme_override_constants/separation = 0
+
+[node name="HUDframe" type="TextureRect" parent="." unique_id=929301381]
+offset_left = -12.0
+offset_top = -7.0
+offset_right = 631.0
+offset_bottom = 257.0
+texture = ExtResource("2_yqo3l")
+expand_mode = 1
+stretch_mode = 4
