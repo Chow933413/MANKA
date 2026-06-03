@@ -151,15 +151,23 @@ func apply_movement(delta: float):
 func _physics_process(delta: float) -> void:
 	
 	if DialogueManager.is_dialogue_active:
+		movement_input = Vector2.ZERO
 		velocity.x = 0
 		velocity.z = 0
-		state_machine.dispatch("to_idle")
+		knockback_velocity = Vector3.ZERO
+		controls_active = false
+		if state_machine:
+			state_machine.dispatch("to_idle")
+			state_machine.set_active(false)
 		move_and_slide()
 		return
 	
 	# Keep state machine active so it can process unfreeze dispatches
 	if state_machine:
-		state_machine.set_active(true)
+		if not DialogueManager.is_dialogue_active and not state_machine.is_active():
+			state_machine.set_active(true)
+			controls_active = true
+			state_machine.dispatch("to_idle")
 
 	# Add the gravity.
 	if not is_on_floor():
