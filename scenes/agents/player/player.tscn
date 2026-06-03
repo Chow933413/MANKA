@@ -259,6 +259,8 @@ wall_min_slide_angle = 0.7853982
 floor_snap_length = 0.3
 script = ExtResource("1_afts6")
 state_machine = NodePath("LimboHSM")
+knockback_force = 8.0
+knockback_friction = 30.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1888793041]
 libraries/ = SubResource("AnimationLibrary_5yufg")

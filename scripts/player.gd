@@ -3,6 +3,7 @@ extends CharacterBody3D
 signal health_changed
 
 # State Machine
+@export_category("State Machines")
 @export var state_machine : LimboHSM
 
 # States
@@ -20,6 +21,7 @@ const SPEED = 3.0
 const JUMP_VELOCITY = 4.5
 
 # Camera Settings
+@export_category("Camera Settings")
 @export var sens_vertical: float = 0.2
 @export var sens_horizontal: float = 0.2
 #@export var min_pitch: float = -15.0 # Max look up angle
@@ -31,9 +33,15 @@ var controls_active: bool = true
 var inventory: Array[String] = []
 
 # Health system
+@export_category("Health Settings")
 @export var max_health: int = 7
 var current_health: int = max_health
 
+# Knocback Settings
+@export_category("Knockback Settings")
+@export var knockback_force: float = 12.0
+@export var knockback_friction: float = 40.0 # How fast the slide slows down
+var knockback_velocity: Vector3 = Vector3.ZERO
 
 # Internal tracking for vertical mouse angle clamping
 var camera_pitch: float = 0.0
@@ -100,6 +108,7 @@ func _initialize_state_machine():
 	state_machine.add_transition(state_machine.ANYSTATE, locked_state, "to_locked")
 	state_machine.add_transition(locked_state, idle_state, "to_idle")
 	
+	
 	# Setup State Machine
 	state_machine.initial_state = idle_state
 	state_machine.initialize(self)
@@ -131,13 +140,29 @@ func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 		
+		
+	# 2. ALWAYS slow down the knockback force over time, no matter what state we are in!
+	if knockback_velocity.length() > 0.1:
+		knockback_velocity = knockback_velocity.move_toward(Vector3.ZERO, knockback_friction * delta)
+		velocity.x = knockback_velocity.x
+		velocity.z = knockback_velocity.z
+	else:
+		# Knockback has finished slowing down!
+		knockback_velocity = Vector3.ZERO
+		
+		# If the player is frozen in the locked state, force them back to idle
+		if state_machine.get_active_state() == locked_state:
+			state_machine.dispatch("to_idle")
+
+	# 3. Handle state machine processing rules
+	# Turn off state machine processing *only* while actively flying backward
+	state_machine.set_active(controls_active and knockback_velocity == Vector3.ZERO)
+	
+	
 	if controls_active:
 		movement_input = Input.get_vector("left", "right", "up", "down")
 	else:
 		movement_input = Vector2.ZERO
-
-	# Note: Your state script files (Move, Idle, etc.) should call apply_movement() 
-	# if they calculate states separately, but we still handle physics processing safely.
 	move_and_slide()
 	
 	# Handle flipping hitboxes dynamically relative to the custom controls input direction
@@ -163,3 +188,18 @@ func _on_hurt_box_area_entered(area: Area3D) -> void:
 			current_health = max_health
 			
 		health_changed.emit(current_health)
+		apply_knockback(area.global_position, knockback_force)
+		
+		
+func apply_knockback(source_position: Vector3, force: float = 12.0) -> void:
+	var push_direction: Vector3 = global_position - source_position
+	
+	push_direction.y = 0
+	push_direction = push_direction.normalized()
+	knockback_velocity = push_direction * force
+	var tween = create_tween()
+	tween.tween_property(sprite, "modulate", Color(1, 0, 0), 0.1)
+	tween.tween_property(sprite, "modulate", Color(1, 1, 1), 0.1)
+
+
+	
