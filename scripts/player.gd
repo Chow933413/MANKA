@@ -24,7 +24,7 @@ const JUMP_VELOCITY = 4.5
 @export_category("Camera Settings")
 @export var sens_vertical: float = 0.2
 @export var sens_horizontal: float = 0.2
-#@export var min_pitch: float = -15.0 # Max look up angle
+@export var min_pitch: float = -15.0 # Max look up angle
 @export var max_pitch: float = 15.0  # Max look down angle
 
 var hitbox_position: float
@@ -65,12 +65,12 @@ func consume_tokens(token_a: String, token_b: String):
 
 func _input(event: InputEvent) -> void:
 	# 1. Mouse Camera Rotation Logic
-	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED and controls_active:
+	#if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED and controls_active:
 		# Horizontal rotation turns the actual player node 360 degrees
-		rotate_y(deg_to_rad(-event.relative.x * sens_horizontal))
+		#rotate_y(deg_to_rad(-event.relative.x * sens_horizontal))
 		
 		## Vertical rotation modifies the camera mount pitch
-		##camera_pitch -= event.relative.y * sens_vertical
+		#camera_pitch -= event.relative.y * sens_vertical
 		#camera_pitch = clamp(camera_pitch, min_pitch, max_pitch)
 		#camera_mount.rotation_degrees.x = camera_pitch
 

@@ -3,23 +3,45 @@
 [ext_resource type="PackedScene" uid="uid://cj0yp7aq2tptk" path="res://scenes/HUD/heart_container.tscn" id="1_qa1nh"]
 [ext_resource type="Script" uid="uid://ywhx7visc47w" path="res://scripts/heart_hud.gd" id="1_yqo3l"]
 [ext_resource type="Texture2D" uid="uid://ursvjacwmyfl" path="res://assets/textures/HUD/HUD-Photoroom.png" id="2_yqo3l"]
+[ext_resource type="Texture2D" uid="uid://4dv57n0nhjvc" path="res://assets/textures/HUD/ChatGPT Image Jun 3, 2026 at 02_26_25 PM.png" id="3_g4vuw"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t4lts"]
+corner_radius_top_left = 100
+corner_radius_top_right = 100
+corner_radius_bottom_right = 100
+corner_radius_bottom_left = 100
 
 [node name="CanvasLayer" type="CanvasLayer" unique_id=1186888506]
 script = ExtResource("1_yqo3l")
 
 [node name="HeartContainer" parent="." unique_id=963020874 instance=ExtResource("1_qa1nh")]
-offset_left = 153.0
-offset_top = 73.0
-offset_right = 278.0
-offset_bottom = 113.0
+offset_left = 144.0
+offset_top = 64.0
+offset_right = 269.0
+offset_bottom = 104.0
 scale = Vector2(3.18, 3)
 theme_override_constants/separation = 0
 
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1425944346]
+clip_children = 1
+clip_contents = true
+offset_left = 45.0
+offset_top = 43.0
+offset_right = 137.0
+offset_bottom = 135.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_t4lts")
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer" unique_id=993909416]
+layout_mode = 2
+texture = ExtResource("3_g4vuw")
+expand_mode = 1
+stretch_mode = 4
+
 [node name="HUDframe" type="TextureRect" parent="." unique_id=929301381]
-offset_left = -12.0
-offset_top = -7.0
-offset_right = 631.0
-offset_bottom = 257.0
+offset_left = -20.0
+offset_top = -14.0
+offset_right = 623.0
+offset_bottom = 250.0
 texture = ExtResource("2_yqo3l")
 expand_mode = 1
 stretch_mode = 4

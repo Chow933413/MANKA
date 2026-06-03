@@ -22,7 +22,7 @@ sky_material = SubResource("ProceduralSkyMaterial_cj8ld")
 
 [sub_resource type="Environment" id="Environment_iky1b"]
 background_mode = 1
-background_color = Color(1, 1, 1, 1)
+background_color = Color(0.315457, 0.53366035, 0.6850812, 1)
 sky = SubResource("Sky_opkwl")
 tonemap_mode = 3
 glow_enabled = true
@@ -63,7 +63,7 @@ size = Vector3(6.904541, 8, 1)
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_oem7y"]
 render_priority = 0
 shader = ExtResource("9_oem7y")
-shader_parameter/ColorParameter = Color(0, 0.249755, 0.642987, 1)
+shader_parameter/ColorParameter = Color(1.6845763e-07, 0.32643092, 0.30259883, 1)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_a76di"]
 material = SubResource("ShaderMaterial_oem7y")
@@ -84,7 +84,7 @@ light_color = Color(0.77692616, 0.75817865, 0.93612444, 1)
 shadow_enabled = true
 
 [node name="Player" parent="." unique_id=319351506 instance=ExtResource("1_1nvli")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.138502, 1.14, -10.782038)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2821293, 0.54695535, 0.3877697)
 
 [node name="Cauldron" parent="." unique_id=2138511628 node_paths=PackedStringArray("spawn_point_path") instance=ExtResource("4_a76di")]
 transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 28.879896, 0.26250133, 2.9569368)
@@ -97,9 +97,6 @@ top_level = true
 
 [node name="trees" type="Node3D" parent="." unique_id=1661149588]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 22.293297, 1.000743, -2.3782141)
-
-[node name="Tree" parent="trees" unique_id=654564548 instance=ExtResource("6_7s2gi")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.525814, 0.024463445, 1.1818309)
 
 [node name="Tree6" parent="trees" unique_id=520458269 instance=ExtResource("6_7s2gi")]
 transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, -5.7184143, 0.102711976, 1.5054163)
@@ -155,9 +152,6 @@ transform = Transform3D(0.4429575, 0, -0.66617477, 0, 0.8000001, 0, 0.66617477, 
 [node name="Tree181" parent="trees" unique_id=1692648638 instance=ExtResource("6_7s2gi")]
 transform = Transform3D(0.74358845, 0, 0.66863763, 0, 1, 0, -0.66863763, 0, 0.74358845, -4.740673, 0.024463445, 1.1578383)
 
-[node name="Tree186" parent="trees" unique_id=1466034965 instance=ExtResource("6_7s2gi")]
-transform = Transform3D(0.8923061, 0, 0.8023652, 0, 1.2, 0, -0.8023652, 0, 0.8923061, -4.3110094, 0.102335006, 0.6115343)
-
 [node name="Tree187" parent="trees" unique_id=1399046257 instance=ExtResource("6_7s2gi")]
 transform = Transform3D(0.74358845, 0, 0.66863763, 0, 1, 0, -0.66863763, 0, 0.74358845, -3.8785374, 0.024463445, 0.8630204)
 
@@ -172,9 +166,6 @@ transform = Transform3D(1.1592625, 0, 0.31001633, 0, 1.2, 0, -0.31001633, 0, 1.1
 
 [node name="Tree191" parent="trees" unique_id=1674340324 instance=ExtResource("6_7s2gi")]
 transform = Transform3D(0.5948708, 0, 0.53491014, 0, 0.8000001, 0, -0.53491014, 0, 0.5948708, -4.3006086, -0.043853402, 1.092572)
-
-[node name="Tree264" parent="trees" unique_id=1706942760 instance=ExtResource("6_7s2gi")]
-transform = Transform3D(1.1622114, 0, -0.29877275, 0, 1.2, 0, 0.29877275, 0, 1.1622114, -5.092328, 0.10119933, 1.1003766)
 
 [node name="Tree265" parent="trees" unique_id=1506827781 instance=ExtResource("6_7s2gi")]
 transform = Transform3D(0.7748076, 0, -0.19918184, 0, 0.8000001, 0, 0.19918184, 0, 0.7748076, -5.3491454, -0.043853402, 1.3560572)
@@ -1565,6 +1556,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.327066, -1.0068474, 0)
 mesh = SubResource("PlaneMesh_a76di")
 
 [node name="CanvasLayer" parent="." unique_id=1186888506 instance=ExtResource("10_a76di")]
+visible = false
 
 [node name="hitbox" type="Area3D" parent="." unique_id=2008895083]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.9113641, 0.5717212, -0.31325275)
