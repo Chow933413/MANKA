@@ -1,6 +1,7 @@
 extends CharacterBody3D
 
-signal health_changed
+signal health_changed(current_health_units: int)
+signal player_died
 
 # State Machine
 @export_category("State Machines")
@@ -36,6 +37,9 @@ var inventory: Array[String] = []
 @export_category("Health Settings")
 @export var max_health: int = 7
 var current_health: int = max_health
+var current_health_units: int = 14
+var is_dead: bool = false
+@onready var respawn_position: Vector3 = global_position
 
 # Knocback Settings
 @export_category("Knockback Settings")
@@ -88,6 +92,16 @@ func _input(event: InputEvent) -> void:
 			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 func _ready() -> void:
+	if NavigationManager.saved_health_units != -1:
+		current_health_units = NavigationManager.saved_health_units
+		print("Player spawned! Restoring health from previous scene: ", current_health_units)
+	else:
+		# First time starting the game, start with full health
+		current_health_units = max_health * 2
+		print("Player spawned! No saved health found, starting full: ", current_health_units)
+		
+	# 2. Tell the HUD to draw the correct amount of hearts right away
+	health_changed.emit(current_health_units)
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	hitbox_position = ($"Sword Hitbox".position.x)
 	_initialize_state_machine()
@@ -182,16 +196,34 @@ func _on_sword_hitbox_body_entered(body: Node3D) -> void:
 
 
 func _on_hurt_box_area_entered(area: Area3D) -> void:
-	if area.name == "hitbox":
-		current_health -= 1
-		if current_health < 0:
-			current_health = max_health
-			
-		health_changed.emit(current_health)
-		apply_knockback(area.global_position, knockback_force)
+	if is_dead: return
+	
+	
+	if area.name.to_lower() == "hitbox":
+		
+		# 1. DEFAULT DAMAGE: Start with a fallback of 2 units just in case
+		var incoming_damage = 1
+		
+		# 2. DYNAMIC DAMAGE: Check if the enemy hitbox has a custom damage variable
+		if "damage_units" in area:
+			incoming_damage = area.damage_units
+			print("Player hit by ", area.name, " dealing ", incoming_damage, " units!")
+		
+		# 3. Deduct the dynamic damage amount
+		current_health_units -= incoming_damage
+		current_health_units = clamp(current_health_units, 0, max_health * 2)
+		
+		# 4. Update the HUD
+		health_changed.emit(current_health_units)
+		
+		if current_health_units <= 0:
+			die()
+		else:
+			apply_knockback(area.global_position, knockback_force)
 		
 		
 func apply_knockback(source_position: Vector3, force: float = 12.0) -> void:
+	if is_dead: return
 	var push_direction: Vector3 = global_position - source_position
 	
 	push_direction.y = 0
@@ -201,5 +233,39 @@ func apply_knockback(source_position: Vector3, force: float = 12.0) -> void:
 	tween.tween_property(sprite, "modulate", Color(1, 0, 0), 0.1)
 	tween.tween_property(sprite, "modulate", Color(1, 1, 1), 0.1)
 
+	state_machine.dispatch("to_locked")
 
+func die() -> void:
+	is_dead = true
+	controls_active = false
+	knockback_velocity = Vector3.ZERO
+	velocity = Vector3.ZERO
+	
+	sprite.modulate = Color(0.2, 0.2, 0.2, 0.8)
+	state_machine.dispatch("to_locked")
+	
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	player_died.emit()
+
+func respawn() -> void:
+	is_dead = false
+	controls_active = true
+	knockback_velocity = Vector3.ZERO
+	velocity = Vector3.ZERO
+	sprite.modulate = Color(1, 1, 1, 1)
+	
+	# CRITICAL: Reset the global tracking value back to full health for the respawned scene!
+	NavigationManager.saved_health_units = max_health * 2
+	
+	current_health_units = max_health * 2
+	health_changed.emit(current_health_units, max_health)
+	
+	state_machine.dispatch("to_idle")
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	
+	if NavigationManager.respawn_scene_path != "":
+		NavigationManager.target_portal_id = NavigationManager.respawn_portal_id
+		NavigationManager.teleport_to_scene(NavigationManager.respawn_scene_path, NavigationManager.respawn_portal_id)
+	else:
+		get_tree().reload_current_scene()
 	

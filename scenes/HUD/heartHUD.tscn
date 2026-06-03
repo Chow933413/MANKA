@@ -11,7 +11,7 @@ corner_radius_top_right = 100
 corner_radius_bottom_right = 100
 corner_radius_bottom_left = 100
 
-[node name="CanvasLayer" type="CanvasLayer" unique_id=1186888506]
+[node name="heartHUD" type="CanvasLayer" unique_id=1186888506]
 script = ExtResource("1_yqo3l")
 
 [node name="HeartContainer" parent="." unique_id=963020874 instance=ExtResource("1_qa1nh")]
@@ -45,3 +45,18 @@ offset_bottom = 250.0
 texture = ExtResource("2_yqo3l")
 expand_mode = 1
 stretch_mode = 4
+
+[node name="RespawnButton" type="Button" parent="." unique_id=225871316]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -146.5
+offset_top = -227.0
+offset_right = 146.5
+offset_bottom = -136.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 45
+text = "RESPAWN"

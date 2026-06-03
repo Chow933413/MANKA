@@ -10,6 +10,10 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 	
-func update(whole: bool):
-	if whole: sprite.frame = 0
-	else: sprite.frame = 2
+func update(state: int) -> void:
+	if state == 2:
+		sprite.frame = 0
+	elif state == 1:
+		sprite.frame = 1
+	else:
+		sprite.frame = 2

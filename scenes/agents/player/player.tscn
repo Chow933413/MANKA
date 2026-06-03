@@ -10,6 +10,7 @@
 [ext_resource type="Script" uid="uid://pvmko37k24ft" path="res://scripts/states/jump.gd" id="5_deemb"]
 [ext_resource type="Script" uid="uid://dhr4m1w78cbcd" path="res://scripts/states/fall.gd" id="6_tige2"]
 [ext_resource type="Script" uid="uid://drh4r6nrn8rli" path="res://scripts/states/attack.gd" id="7_mvh0q"]
+[ext_resource type="PackedScene" uid="uid://bnmfgos1j56vl" path="res://scenes/HUD/heartHUD.tscn" id="11_ujf17"]
 
 [sub_resource type="Animation" id="Animation_mvh0q"]
 resource_name = "Attack"
@@ -348,6 +349,8 @@ collision_layer = 2
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HurtBox" unique_id=850109684]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.018380597, 0.048080444, 0)
 shape = SubResource("CapsuleShape3D_mvh0q")
+
+[node name="CanvasLayer" parent="." unique_id=1186888506 instance=ExtResource("11_ujf17")]
 
 [connection signal="body_entered" from="Sword Hitbox" to="." method="_on_sword_hitbox_body_entered"]
 [connection signal="area_entered" from="HurtBox" to="." method="_on_hurt_box_area_entered"]

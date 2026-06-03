@@ -9,7 +9,6 @@
 [ext_resource type="PackedScene" uid="uid://d1e2u3fc5egv3" path="res://scenes/surrounding/portal.tscn" id="7_fj52k"]
 [ext_resource type="MeshLibrary" uid="uid://les21xne5sow" path="res://mesh_library/landscape_mesh.tres" id="8_vals0"]
 [ext_resource type="Shader" uid="uid://batk14s1dymoq" path="res://shaders/water.tres" id="9_oem7y"]
-[ext_resource type="PackedScene" uid="uid://bnmfgos1j56vl" path="res://scenes/HUD/heartHUD.tscn" id="10_a76di"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_cj8ld"]
 sky_top_color = Color(0, 0, 0, 1)
@@ -150,10 +149,7 @@ transform = Transform3D(0.5536968, 0, -0.8327184, 0, 1, 0, 0.8327184, 0, 0.55369
 transform = Transform3D(0.4429575, 0, -0.66617477, 0, 0.8000001, 0, 0.66617477, 0, 0.4429575, -6.7052326, -0.043853402, 3.3545485)
 
 [node name="Tree181" parent="trees" unique_id=1692648638 instance=ExtResource("6_7s2gi")]
-transform = Transform3D(0.74358845, 0, 0.66863763, 0, 1, 0, -0.66863763, 0, 0.74358845, -4.740673, 0.024463445, 1.1578383)
-
-[node name="Tree187" parent="trees" unique_id=1399046257 instance=ExtResource("6_7s2gi")]
-transform = Transform3D(0.74358845, 0, 0.66863763, 0, 1, 0, -0.66863763, 0, 0.74358845, -3.8785374, 0.024463445, 0.8630204)
+transform = Transform3D(0.74358845, 0, 0.66863763, 0, 1, 0, -0.66863763, 0, 0.74358845, -4.9752083, 0.024463445, 1.349875)
 
 [node name="Tree188" parent="trees" unique_id=1442311039 instance=ExtResource("6_7s2gi")]
 transform = Transform3D(0.8923061, 0, 0.8023652, 0, 1.2, 0, -0.8023652, 0, 0.8923061, -4.25869, 0.096761495, 1.7211254)
@@ -165,7 +161,7 @@ transform = Transform3D(0.8923061, 0, 0.8023652, 0, 1.2, 0, -0.8023652, 0, 0.892
 transform = Transform3D(1.1592625, 0, 0.31001633, 0, 1.2, 0, -0.31001633, 0, 1.1592625, -4.5604644, 0.17065185, 1.4158041)
 
 [node name="Tree191" parent="trees" unique_id=1674340324 instance=ExtResource("6_7s2gi")]
-transform = Transform3D(0.5948708, 0, 0.53491014, 0, 0.8000001, 0, -0.53491014, 0, 0.5948708, -4.3006086, -0.043853402, 1.092572)
+transform = Transform3D(0.5948708, 0, 0.53491014, 0, 0.8000001, 0, -0.53491014, 0, 0.5948708, -4.230559, -0.043853402, 1.1999941)
 
 [node name="Tree265" parent="trees" unique_id=1506827781 instance=ExtResource("6_7s2gi")]
 transform = Transform3D(0.7748076, 0, -0.19918184, 0, 0.8000001, 0, 0.19918184, 0, 0.7748076, -5.3491454, -0.043853402, 1.3560572)
@@ -701,9 +697,6 @@ transform = Transform3D(-0.34131488, 0, 0.9399492, 0, 1, 0, -0.9399492, 0, -0.34
 [node name="Tree204" parent="trees" unique_id=752767235 instance=ExtResource("6_7s2gi")]
 transform = Transform3D(-0.7476124, 0, 0.28473806, 0, 0.8000001, 0, -0.28473806, 0, -0.7476124, -2.2195053, -0.04385349, -0.93964314)
 
-[node name="Tree262" parent="trees" unique_id=2099534509 instance=ExtResource("6_7s2gi")]
-transform = Transform3D(-0.7476124, 0, 0.28473806, 0, 0.8000001, 0, -0.28473806, 0, -0.7476124, -1.2380357, -0.04385349, -2.2724552)
-
 [node name="Tree205" parent="trees" unique_id=544996499 instance=ExtResource("6_7s2gi")]
 transform = Transform3D(-0.98836684, 0, -0.15208894, 0, 1, 0, 0.15208894, 0, -0.98836684, -1.9797134, 0.024463445, -1.381262)
 
@@ -1095,13 +1088,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5171546, 0, 0.38399032)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2950573, 0, 0)
 
 [node name="Tree380" parent="trees" unique_id=26504066 instance=ExtResource("6_7s2gi")]
-transform = Transform3D(0.99000144, 0, 0.14105678, 0, 1, 0, -0.14105678, 0, 0.99000144, 0.42652988, 0.024463445, 1.3135852)
+transform = Transform3D(0.99000144, 0, 0.14105678, 0, 1, 0, -0.14105678, 0, 0.99000144, 0.42653036, 0.024463445, 1.582328)
 
 [node name="Tree415" parent="trees" unique_id=2055208414 instance=ExtResource("6_7s2gi")]
 transform = Transform3D(0.83696485, 0, -0.5472564, 0, 1, 0, 0.5472564, 0, 0.83696485, 2.4877567, 0.024463445, 2.7455435)
 
 [node name="Tree381" parent="trees" unique_id=436825624 instance=ExtResource("6_7s2gi")]
-transform = Transform3D(0.6912796, 0, -0.40265745, 0, 0.8000001, 0, 0.40265745, 0, 0.6912796, 0.09694433, -0.043853402, 1.257481)
+transform = Transform3D(0.6912796, 0, -0.40265745, 0, 0.8000001, 0, 0.40265745, 0, 0.6912796, -0.45158815, -0.043853402, 1.257481)
 
 [node name="Tree382" parent="trees" unique_id=1153816527 instance=ExtResource("6_7s2gi")]
 transform = Transform3D(0.6912796, 0, -0.40265745, 0, 0.8000001, 0, 0.40265745, 0, 0.6912796, -0.27314997, -0.043853402, 1.7276572)
@@ -1269,7 +1262,7 @@ transform = Transform3D(-0.3477198, 0, -0.72047967, 0, 0.7999999, 0, 0.72047967,
 transform = Transform3D(-0.7713022, 0, 0.21235077, 0, 0.7999999, 0, -0.21235077, 0, -0.7713022, -1.0150609, -0.043853402, 0.680868)
 
 [node name="Tree325" parent="trees" unique_id=1656419100 instance=ExtResource("6_7s2gi")]
-transform = Transform3D(-0.7713022, 0, 0.21235077, 0, 0.7999999, 0, -0.21235077, 0, -0.7713022, -0.76644754, -0.043853402, 0.4686437)
+transform = Transform3D(-0.7713022, 0, 0.21235077, 0, 0.7999999, 0, -0.21235077, 0, -0.7713022, -0.59592295, -0.043853402, 0.8705127)
 
 [node name="Tree326" parent="trees" unique_id=256520416 instance=ExtResource("6_7s2gi")]
 transform = Transform3D(-0.71296376, 0, -0.36288115, 0, 0.8000001, 0, 0.36288115, 0, -0.71296376, -1.8249612, -0.043853402, 0.17353392)
@@ -1281,7 +1274,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6338964, 0, 1.6442727)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8559937, 0, 1.2602823)
 
 [node name="Tree5" parent="trees" unique_id=264212183 instance=ExtResource("6_7s2gi")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3027954, 0, 0)
 
 [node name="Tree3" parent="trees" unique_id=2042790025 instance=ExtResource("6_7s2gi")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.64817584, 0, 1.7553449)
@@ -1474,7 +1467,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.200798, 3.3471704, -13.074
 shape = SubResource("BoxShape3D_3asx1")
 
 [node name="Portal_1" parent="." unique_id=2047264875 instance=ExtResource("7_fj52k")]
-transform = Transform3D(-2.1855692e-08, 0, -0.49999997, 0, 0.5, 0, 0.49999997, 0, -2.1855692e-08, 45.520405, 1.0831476, -0.50424504)
+transform = Transform3D(-2.1855692e-08, 0, -0.49999997, 0, 0.5, 0, 0.49999997, 0, -2.1855692e-08, 40.5148, 1.0831476, 2.031074)
 collision_mask = 2
 target_scene = "uid://td0yjlm4mphr"
 portal_id = "Portal_1"
@@ -1554,9 +1547,6 @@ metadata/_editor_floor_ = Vector3(0, -1, 0)
 [node name="water" type="MeshInstance3D" parent="." unique_id=1407040296]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.327066, -1.0068474, 0)
 mesh = SubResource("PlaneMesh_a76di")
-
-[node name="CanvasLayer" parent="." unique_id=1186888506 instance=ExtResource("10_a76di")]
-visible = false
 
 [node name="hitbox" type="Area3D" parent="." unique_id=2008895083]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.9113641, 0.5717212, -0.31325275)
