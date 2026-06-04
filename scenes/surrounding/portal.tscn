@@ -9,7 +9,7 @@
 render_priority = 0
 shader = ExtResource("1_jr6l0")
 shader_parameter/Color_Intensity = 7.0
-shader_parameter/Portal_Color = Color(0.616379, 0.36396736, 1, 1)
+shader_parameter/Portal_Color = Color(0.02021784, 0.26327786, 0.19702849, 1)
 shader_parameter/Speed_X_Y = Vector2(-0.5, 0.2)
 shader_parameter/Portal_Texture = ExtResource("2_d4jfq")
 
@@ -53,7 +53,7 @@ gravity = Vector3(0, 0, 0)
 blend_mode = 1
 cull_mode = 2
 shading_mode = 0
-albedo_color = Color(1.7827545, 1.0986462, 3.438669, 1)
+albedo_color = Color(0.611, 2.556, 1.979, 1)
 albedo_texture = ExtResource("3_dyed0")
 use_particle_trails = true
 
@@ -86,7 +86,7 @@ transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 2
 shape = SubResource("CylinderShape3D_jr6l0")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=1661135078]
-light_color = Color(0.6156863, 0.3647059, 1, 1)
+light_color = Color(0.051845483, 0.84212905, 0.3277831, 1)
 light_energy = 5.0
 light_indirect_energy = 0.0
 light_volumetric_fog_energy = 5.0

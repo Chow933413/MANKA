@@ -131,6 +131,7 @@ func _initialize_state_machine():
 
 func check_attack_input():
 	if DialogueManager.is_dialogue_active:return
+	
 	if Input.is_action_just_pressed("attack"):
 		state_machine.dispatch("to_attack")
 
@@ -156,6 +157,8 @@ func _physics_process(delta: float) -> void:
 		velocity.z = 0
 		knockback_velocity = Vector3.ZERO
 		controls_active = false
+		
+		
 		if state_machine:
 			state_machine.dispatch("to_idle")
 			state_machine.set_active(false)
@@ -184,10 +187,10 @@ func _physics_process(delta: float) -> void:
 		knockback_velocity = Vector3.ZERO
 		
 		# UNFREEZE TRIGGER: Regain control only when sliding stops and player is safely grounded
-		if state_machine and state_machine.get_active_state() == locked_state and not is_dead:
-			if is_on_floor():
-				controls_active = true
-				state_machine.dispatch("to_idle")
+	if state_machine and state_machine.get_active_state() == locked_state and not is_dead:
+		if is_on_floor() and knockback_velocity == Vector3.ZERO:
+			controls_active = true
+			state_machine.dispatch("to_idle")
 
 	# Control tracking vector allocations
 	if controls_active and knockback_velocity == Vector3.ZERO:
@@ -280,3 +283,10 @@ func respawn() -> void:
 		NavigationManager.teleport_to_scene(NavigationManager.respawn_scene_path, NavigationManager.respawn_portal_id)
 	else:
 		get_tree().reload_current_scene()
+
+
+func _on_sword_hitbox_area_entered(area: Area3D) -> void:
+	var parent_node = area.get_parent()
+	
+	if parent_node and parent_node.has_method("take_damage"):
+		parent_node.take_damage()
