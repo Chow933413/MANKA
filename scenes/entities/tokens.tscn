@@ -118,7 +118,7 @@ transform = Transform3D(-4.3711385e-08, -0.9999999, 0, 0.9999999, -4.3711385e-08
 transform = Transform3D(0.25, 8.881784e-16, 0, -8.881784e-16, 0.25, 0, 0, 0, 0.25, -1.3827204e-08, 0.024569277, 0.001922667)
 
 [node name="Label3D" type="Label3D" parent="Visuals/Meshy_AI_Solar_Lattice_Orb_0602134435_texture" unique_id=93321483]
-transform = Transform3D(-1.7484554e-07, 3.9999998, -1.4210855e-14, 1.7484554e-07, 0, -4, -3.9999998, -1.7484554e-07, -1.7484555e-07, -1.2, -0.09827711, -0.007690668)
+transform = Transform3D(-1.7484554e-07, 3.9999998, -2.842171e-14, 1.7484554e-07, -1.4210855e-14, -4, -3.9999998, -1.7484554e-07, -1.7484555e-07, 1.4033842, -0.09827722, -0.007690668)
 billboard = 2
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

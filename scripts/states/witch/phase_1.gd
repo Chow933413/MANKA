@@ -6,17 +6,9 @@ var teleport_cooldown: float = 0.0
 
 func enter() -> void:
 	witch.animation_player.play("Idle")
-	attack_timer = 2
+	attack_timer = 4.0
 	
 func physics_update(delta: float) -> void:
-	if teleport_cooldown > 0:
-		teleport_cooldown -= delta
-	
-	if teleport_cooldown <= 0:
-		# Check distance: if player is within 3.5 units, 30% chance to teleport
-		try_teleport_away(0.5, 0.3)
-		
-		teleport_cooldown = 2.0
 		
 	attack_timer += delta
 	if attack_timer >= time_between_attacks:

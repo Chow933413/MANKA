@@ -17,6 +17,11 @@ func updateHearts(current_health_units: int):
 	print("--- HeartContainer received value: ", current_health_units)
 	var hearts = get_children()
 	
+	if current_health_units <= 0:
+		for heart in hearts:
+			if heart.has_method("update"):
+				heart.update(0)
+		return
 	
 	for i in range(hearts.size()):
 		# The health value required to fill up to this SPECIFIC heart container slot

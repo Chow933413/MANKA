@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://dk6inwch46lcq"]
+
+[ext_resource type="Texture2D" uid="uid://baj75grw8gs74" path="res://assets/textures/flowerbush.png" id="1_tftma"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ai5yx"]
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 1
+alpha_antialiasing_edge = 0.3
+cull_mode = 2
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("1_tftma")
+texture_filter = 0
+
+[sub_resource type="QuadMesh" id="QuadMesh_myuei"]
+material = SubResource("StandardMaterial3D_ai5yx")
+
+[node name="FlowerBush" type="Node3D" unique_id=9251178]
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=1013398924]
+mesh = SubResource("QuadMesh_myuei")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="." unique_id=1462754689]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
+mesh = SubResource("QuadMesh_myuei")

@@ -57,7 +57,7 @@ func determine_next_phase() -> void:
 		while DialogueManager.is_dialogue_active:
 			await get_tree().physics_frame
 			
-		await witch.teleport_away_from_player(3.0, 5.0)
+		
 		_freeze_player(false)
 		state_machine.change_state("Phase 2") 
 		return
@@ -72,7 +72,7 @@ func determine_next_phase() -> void:
 		while DialogueManager.is_dialogue_active:
 			await get_tree().physics_frame
 		
-		await witch.teleport_away_from_player(4.0, 6.0)
+		
 		_freeze_player(false)
 		# FIX 3: Removed space
 		state_machine.change_state("Phase 3")

@@ -64,13 +64,13 @@ size = Vector3(24.431946, 8, 1)
 [sub_resource type="BoxShape3D" id="BoxShape3D_po5je"]
 size = Vector3(1, 8, 17.685059)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_oem7y"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_d3ub6"]
 render_priority = 0
 shader = ExtResource("9_oem7y")
-shader_parameter/ColorParameter = Color(1.6845763e-07, 0.32643092, 0.30259883, 1)
+shader_parameter/ColorParameter = Color(0.188235, 0.396078, 0.780392, 1)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_a76di"]
-material = SubResource("ShaderMaterial_oem7y")
+material = SubResource("ShaderMaterial_d3ub6")
 size = Vector2(100, 100)
 
 [sub_resource type="BoxMesh" id="BoxMesh_a76di"]

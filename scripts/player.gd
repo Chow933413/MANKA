@@ -94,6 +94,10 @@ func _input(event: InputEvent) -> void:
 			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 func _ready() -> void:
+	
+	inventory.clear()
+	print("Player Ready: Inventory wiped for the new scene! Current: ", inventory)
+	
 	if NavigationManager.saved_health_units != -1:
 		current_health_units = NavigationManager.saved_health_units
 		print("Player spawned! Restoring health from previous scene: ", current_health_units)
@@ -210,25 +214,50 @@ func _on_sword_hitbox_body_entered(body: Node3D) -> void:
 	if body.has_method("take_damage"):
 		body.take_damage()
 
+func collect_potion() -> void:
+	if not "Fire Potion" in inventory:
+		inventory.append("Fire Potion")
+		print("Collected Fire Resistance Potion!")
+
+func take_damage(incoming_damage: int = 2, source_position: Vector3 = Vector3.ZERO) -> void:
+	if is_dead: return
+	
+	# 1. IMMUNITY CHECK: If holding the Fire Potion, completely ignore damage!
+	if "Fire Potion" in inventory:
+		print("Player: Immune to damage thanks to Fire Potion!")
+		return
+
+	print("Player taking damage: ", incoming_damage, " units.")
+	
+	current_health_units -= incoming_damage
+	current_health_units = clamp(current_health_units, 0, max_health * 2)
+	
+	health_changed.emit(current_health_units)
+	
+	if current_health_units <= 0:
+		die()
+	else:
+		# If a source position was passed, fly backward! 
+		# If no position was passed (like a default fallback), bounce away from current spot
+		var source = source_position if source_position != Vector3.ZERO else global_position - Vector3.FORWARD
+		apply_knockback(source, knockback_force)
+
 func _on_hurt_box_area_entered(area: Area3D) -> void:
 	if is_dead: return
 	
-	if area.name.to_lower().contains("hitbox") or area.is_in_group("deadly_hazard"):
-		var incoming_damage = 2 # Changed default to 2 units (1 full heart)
+	if area.name.to_lower().contains("hitbox"):
+		# 1. Handle string token mismatch fallback ("fire_resistance" or "Fire Potion")
+		if "Fire Potion" in inventory or "fire_resistance" in inventory:
+			print("Immune to hazard area thanks to potion inventory!")
+			return
 		
+		var incoming_damage = 2
 		if "damage_units" in area:
 			incoming_damage = area.damage_units
 			print("Player hit by ", area.name, " dealing ", incoming_damage, " units!")
 		
-		current_health_units -= incoming_damage
-		current_health_units = clamp(current_health_units, 0, max_health * 2)
-		
-		health_changed.emit(current_health_units)
-		
-		if current_health_units <= 0:
-			die()
-		else:
-			apply_knockback(area.global_position, knockback_force)
+		# Pass the data directly into our new unified damage function!
+		take_damage(incoming_damage, area.global_position)
 		
 func apply_knockback(source_position: Vector3, force: float = 12.0) -> void:
 	if is_dead: return
@@ -251,6 +280,10 @@ func apply_knockback(source_position: Vector3, force: float = 12.0) -> void:
 		state_machine.dispatch("to_locked")
 
 func die() -> void:
+	current_health_units = 0
+	health_changed.emit(current_health_units) 
+	player_died.emit()
+	
 	is_dead = true
 	controls_active = false
 	knockback_velocity = Vector3.ZERO
@@ -290,3 +323,33 @@ func _on_sword_hitbox_area_entered(area: Area3D) -> void:
 	
 	if parent_node and parent_node.has_method("take_damage"):
 		parent_node.take_damage()
+
+# Inside Player.gd
+@onready var alert_label: Label3D = $Label3D
+
+func play_alert_animation(text_to_show: String) -> void:
+	if not alert_label: return
+	
+	# Update the label with the custom text passed from the trigger line
+	alert_label.text = text_to_show
+	alert_label.visible = true
+	alert_label.modulate = Color(1, 0, 0, 1) # Full red and visible
+	
+	# Start with a small scale for a pop effect
+	alert_label.scale = Vector3.ZERO
+	
+	var tween = create_tween().set_parallel(true)
+	
+	# 1. Pop scale up with a slight bounce
+	tween.tween_property(alert_label, "scale", Vector3(1.2, 1.2, 1.2), 0.15)\
+		.set_trans(Tween.TRANS_BACK)\
+		.set_ease(Tween.EASE_OUT)
+		
+	# 2. Fade it out completely after a short delay
+	var fade_tween = create_tween()
+	fade_tween.tween_interval(0.7) # Keep visible for 0.7 seconds
+	fade_tween.tween_property(alert_label, "modulate:a", 0.0, 0.3) # Fade away
+	
+	# Hide it cleanly once the fade finishes
+	fade_tween.finished.connect(func(): alert_label.visible = false)
+	

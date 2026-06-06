@@ -26,22 +26,34 @@ func interact() -> void:
 func take_damage() -> void:
 	if is_invulnerable: return
 	
-	# If the current state has a custom way to handle being hit (like Intro), let it handle it!
-	if state_machine.current_state and state_machine.current_state.has_method("handle_hit_during_state"):
-		state_machine.current_state.handle_hit_during_state()
-		return
-		
-	if state_machine.current_state.name.to_lower() == "dead":
-		return
-		
-	current_health -= 1
-	print("Witch Health: ", current_health)
+	var state_name = state_machine.current_state.name.to_lower()
+	if state_name == "phase 2" or state_name == "phase 1":
+		var player = get_tree().get_first_node_in_group("player")
+		if player and "inventory" in player and "Fire Potion" in player.inventory:
+			_retreat_to_hut_permanently()
+			return
+
+
+func _retreat_to_hut_permanently() -> void:
+	is_invulnerable = true
 	
-	if current_health <= 0:
-		state_machine.change_state("Dead")
-	else:
-		state_machine.change_state("Hurt")
+	# Stop whatever phase she was doing
+	state_machine.change_state("") # Clear state so timers stop processing
+	
+	
 		
+	# Find the hut marker in your level scene
+	var hut_spot = get_tree().get_root().find_child("WitchHutSpot", true, false)
+	if hut_spot:
+		await teleport_to(hut_spot.global_position)
+		
+	# Dialogue trigger right before popping away
+	DialogueManager.start_dialogue("THE WOODLAND WITCH", "Hehe")
+	while DialogueManager.is_dialogue_active:
+		await get_tree().physics_frame
+		# Optional: Play an idle animation at her hut, serving as the instructor now
+		animation_player.play("Idle")
+
 func _physics_process(delta: float) -> void:
 	if state_machine: 
 		state_machine._physics_process(delta)
@@ -125,3 +137,4 @@ func teleport_away_from_player(min_range: float = 6.0, max_range: float = 10.0) 
 		)
 	
 	await teleport_to(best_spot)
+	

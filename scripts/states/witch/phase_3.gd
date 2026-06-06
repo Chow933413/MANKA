@@ -6,17 +6,9 @@ var teleport_cooldown: float = 0.0
 
 func enter() -> void:
 	witch.animation_player.play("Idle")
-	attack_timer = 1.0
+	attack_timer = 4.0
 	
 func physics_update(delta: float) -> void:
-	if teleport_cooldown > 0:
-		teleport_cooldown -= delta
-	
-	if teleport_cooldown <= 0:
-		# Check distance: if player is within 3.5 units, 30% chance to teleport
-		try_teleport_away(2.0, 0.3)
-		
-		teleport_cooldown = 2.0
 	
 	attack_timer += delta
 	if attack_timer >= time_between_attacks:
@@ -44,7 +36,7 @@ func execute_combo() -> void:
 	if state_machine.current_state != self: return
 	
 	# Ground Trap
-	witch.animation_player.play("Cast Spell")
+	witch.animation_player.play("Ground Spell")
 	await get_tree().create_timer(0.3).timeout
 	
 	if state_machine.current_state != self: return
