@@ -444,6 +444,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05267334, 0)
 shape = SubResource("CapsuleShape3D_3jv03")
 
 [node name="InteractionArea" type="Area3D" parent="." unique_id=1270745294]
+collision_mask = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="InteractionArea" unique_id=913084465]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.084350586, -0.043701172)
@@ -470,3 +471,12 @@ script = ExtResource("11_d48kx")
 
 [node name="Dead" type="Node" parent="StateMachine" unique_id=630226498]
 script = ExtResource("13_s6nho")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=775468331]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0061455667, 0.15360111, 0.23612162)
+light_color = Color(1, 0.7308662, 0.6713369, 1)
+light_energy = 0.5
+light_indirect_energy = 0.0
+light_volumetric_fog_energy = 0.0
+shadow_enabled = true
+omni_range = 0.5903227

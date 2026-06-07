@@ -1,0 +1,179 @@
+[gd_scene format=3 uid="uid://djtfk3c4crdxi"]
+
+[ext_resource type="Script" uid="uid://cr7ybq544pqor" path="res://scripts/fire.gd" id="1_ev8jl"]
+[ext_resource type="Texture2D" uid="uid://bkkq4elb2c3gu" path="res://assets/textures/effects/fire/T_fire01.png" id="1_n08xv"]
+[ext_resource type="Texture2D" uid="uid://cwo1wh6ce83im" path="res://assets/textures/effects/fire/T_VFX_Glow_1.PNG" id="2_83m1m"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_83m1m"]
+radius = 0.82820624
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_83m1m"]
+transparency = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+vertex_color_is_srgb = true
+albedo_texture = ExtResource("1_n08xv")
+albedo_texture_force_srgb = true
+billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_ev8jl"]
+_data = [Vector2(0.7112172, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_f83ou"]
+texture_mode = 1
+curve = SubResource("Curve_ev8jl")
+
+[sub_resource type="Gradient" id="Gradient_ev8jl"]
+offsets = PackedFloat32Array(0.14082687, 0.3475452, 0.5749354)
+colors = PackedColorArray(1, 1, 1, 1, 0.62, 0.4836, 0.4836, 1, 0.08, 0.08, 0.08, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_f83ou"]
+gradient = SubResource("Gradient_ev8jl")
+
+[sub_resource type="Curve" id="Curve_fjwco"]
+_data = [Vector2(0, 0.4958576), 0.0, 1.7186676, 0, 0, Vector2(0.74999994, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_xadu5"]
+curve = SubResource("Curve_fjwco")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_hofjl"]
+lifetime_randomness = 0.08
+particle_flag_rotate_y = true
+emission_shape = 1
+emission_sphere_radius = 0.2
+angle_min = -179.99998
+angle_max = 180.00002
+direction = Vector3(0, 1, 0)
+spread = 15.0
+initial_velocity_min = 1.0
+initial_velocity_max = 2.0
+radial_velocity_min = -2.2351742e-05
+radial_velocity_max = 0.49997765
+gravity = Vector3(0, 1, 0)
+scale_min = 0.9
+scale_max = 1.4
+scale_curve = SubResource("CurveTexture_xadu5")
+color = Color(2, 1.2, 0.5, 1)
+color_ramp = SubResource("GradientTexture1D_f83ou")
+alpha_curve = SubResource("CurveTexture_f83ou")
+
+[sub_resource type="QuadMesh" id="QuadMesh_w741i"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fjwco"]
+render_priority = 1
+blend_mode = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+vertex_color_is_srgb = true
+albedo_texture = ExtResource("2_83m1m")
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_xadu5"]
+_data = [Vector2(0, 1), 0.0, -0.29145584, 0, 1, Vector2(0.18010752, 0.9475066), 0.0, 0.0, 0, 0, Vector2(0.27150536, 0.6902888), 0.0, 0.0, 0, 0, Vector2(0.34139782, 0.88976383), 0.0, 0.0, 0, 0, Vector2(0.44892472, 0.8792651), 0.0, 0.0, 0, 0, Vector2(0.5, 0), 0.0, 0.0, 0, 0, Vector2(0.5564516, 0.74803156), 0.0, 0.0, 0, 0, Vector2(0.6236559, 1), 0.0, 0.0, 0, 0, Vector2(0.70430106, 0.21784782), 0.0, 0.0, 0, 0, Vector2(0.7930108, 0.7900263), 0.0, 0.0, 0, 0, Vector2(1, 0.24934387), 0.0, 0.0, 0, 0]
+point_count = 11
+
+[sub_resource type="CurveTexture" id="CurveTexture_hofjl"]
+curve = SubResource("Curve_xadu5")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_w741i"]
+lifetime_randomness = 0.1
+emission_shape = 6
+emission_ring_axis = Vector3(0, 1, 0)
+emission_ring_height = 0.8
+emission_ring_radius = 0.6
+emission_ring_inner_radius = 0.4
+emission_ring_cone_angle = 90.0
+direction = Vector3(0, 1, 0)
+spread = 25.0
+initial_velocity_min = 0.5
+initial_velocity_max = 2.0
+gravity = Vector3(0, 1, 0)
+scale_min = 0.04
+scale_max = 0.089999996
+scale_curve = SubResource("CurveTexture_hofjl")
+color = Color(2, 1, 0.4, 1)
+
+[sub_resource type="QuadMesh" id="QuadMesh_kqx6c"]
+
+[sub_resource type="Animation" id="Animation_83m1m"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:light_energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [2.8]
+}
+
+[sub_resource type="Animation" id="Animation_ev8jl"]
+resource_name = "init"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:light_energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6666667, 1, 1.4, 1.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [1.0, 4.0, 7.0, 7.0, 4.0, 1.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_f83ou"]
+_data = {
+&"RESET": SubResource("Animation_83m1m"),
+&"init": SubResource("Animation_ev8jl")
+}
+
+[node name="Fire" type="Area3D" unique_id=16309545]
+collision_mask = 2
+script = ExtResource("1_ev8jl")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1534353040]
+shape = SubResource("SphereShape3D_83m1m")
+
+[node name="Fire" type="GPUParticles3D" parent="." unique_id=761656555]
+material_override = SubResource("StandardMaterial3D_83m1m")
+amount = 25
+lifetime = 1.2
+process_material = SubResource("ParticleProcessMaterial_hofjl")
+draw_pass_1 = SubResource("QuadMesh_w741i")
+
+[node name="Sparks" type="GPUParticles3D" parent="." unique_id=1228120297]
+material_override = SubResource("StandardMaterial3D_fjwco")
+amount = 35
+process_material = SubResource("ParticleProcessMaterial_w741i")
+draw_pass_1 = SubResource("QuadMesh_kqx6c")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=235472802]
+light_color = Color(0.9885823, 0.29712343, 0, 1)
+light_energy = 2.8
+omni_range = 2.8156366
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=2133931213]
+root_node = NodePath("../OmniLight3D")
+libraries/ = SubResource("AnimationLibrary_f83ou")
+autoplay = &"init"
+
+[node name="Timer" type="Timer" parent="." unique_id=2011194714]
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

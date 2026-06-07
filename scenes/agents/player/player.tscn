@@ -245,7 +245,7 @@ _data = {
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_mvh0q"]
 radius = 0.20800781
-height = 0.84228516
+height = 0.8703613
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_qcst6"]
 size = Vector3(0.3559723, 0.31567383, 0.43824005)
@@ -287,7 +287,7 @@ texture = ExtResource("3_tige2")
 hframes = 7
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=501911463]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.018380597, 0.048080444, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.018380597, 0.03404236, 0)
 shape = SubResource("CapsuleShape3D_mvh0q")
 
 [node name="Sword Hitbox" type="Area3D" parent="." unique_id=384862787]

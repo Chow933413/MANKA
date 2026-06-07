@@ -1,6 +1,5 @@
 extends CanvasLayer
 
-
 var current_cauldron: Node3D
 var slots = ["", ""] # 2 slot memory
 

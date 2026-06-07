@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://rpcqp43pn2p"]
 
 [ext_resource type="Script" uid="uid://hhwxnsxykoax" path="res://scripts/states/witch/magic_spark.gd" id="1_ksfih"]
-[ext_resource type="Texture2D" uid="uid://1jcaxvke0fx4" path="res://assets/textures/witch/Spear.png" id="1_qc2qb"]
+[ext_resource type="Texture2D" uid="uid://5gti2v8jeldn" path="res://assets/textures/witch/Fireball.png" id="2_ksfih"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_ksfih"]
-radius = 0.10814365
+radius = 0.18277459
 
 [sub_resource type="Animation" id="Animation_73nfc"]
 length = 0.001
@@ -75,9 +75,10 @@ root_node = NodePath("../Sprite3D")
 libraries/ = SubResource("AnimationLibrary_175ci")
 
 [node name="Sprite3D" type="Sprite3D" parent="." unique_id=887964943]
+pixel_size = 0.03
 billboard = 2
 texture_filter = 0
-texture = ExtResource("1_qc2qb")
+texture = ExtResource("2_ksfih")
 hframes = 10
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]

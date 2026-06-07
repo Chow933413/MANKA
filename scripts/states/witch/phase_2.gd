@@ -1,5 +1,6 @@
 extends WitchState
 
+
 func enter() -> void:
 	var player = get_tree().get_first_node_in_group("player")
 	if not player:
@@ -20,9 +21,9 @@ func enter() -> void:
 		if state_machine.current_state != self: return
 		
 		_spawn_visual_trap(player.global_position)
-		
+		witch.animation_player.play("Idle")
 		print("Witch Phase 2: Trap spawned. Waiting for player to strike!")
-
+		
 	# 2. PLAYER DOES NOT HAVE POTION (Instant Kill)
 	else:
 		print("Witch Phase 2: No potion! Initiating instant-kill sequence.")

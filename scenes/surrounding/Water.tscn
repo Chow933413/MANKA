@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://dabnpdy5s8qsn"]
+
+[ext_resource type="Script" uid="uid://ct7bvqikl28vy" path="res://scripts/water.gd" id="1_mjm3t"]
+[ext_resource type="Shader" uid="uid://batk14s1dymoq" path="res://shaders/water.tres" id="2_2rmrj"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6jiwx"]
+render_priority = 0
+shader = ExtResource("2_2rmrj")
+shader_parameter/ColorParameter = Color(0.197975, 0.361007, 0.46061, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_2rmrj"]
+material = SubResource("ShaderMaterial_6jiwx")
+size = Vector2(100, 100)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_6jiwx"]
+size = Vector3(100, 0, 100)
+
+[node name="Water" type="Area3D" unique_id=1584496340]
+collision_mask = 2
+script = ExtResource("1_mjm3t")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=47032099]
+mesh = SubResource("PlaneMesh_2rmrj")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=164330609]
+shape = SubResource("BoxShape3D_6jiwx")

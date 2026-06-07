@@ -32,6 +32,7 @@ var hitbox_position: float
 var movement_input: Vector2 = Vector2.ZERO
 var controls_active: bool = true
 var inventory: Array[String] = []
+var last_safe_ground_position: Vector3 = Vector3.ZERO
 
 # Health system
 @export_category("Health Settings")
@@ -112,6 +113,8 @@ func _ready() -> void:
 	hitbox_position = ($"Sword Hitbox".position.x)
 	_initialize_state_machine()
 	
+	last_safe_ground_position = global_position
+	
 	# Cache initial camera tilt tracking value
 	camera_pitch = camera_mount.rotation_degrees.x
 
@@ -175,7 +178,11 @@ func _physics_process(delta: float) -> void:
 			state_machine.set_active(true)
 			controls_active = true
 			state_machine.dispatch("to_idle")
-
+	
+	if is_on_floor() and controls_active and not is_dead and knockback_velocity == Vector3.ZERO:
+		if velocity.y >= 0: # Ensures we don't track coordinates while slipping or falling!
+			last_safe_ground_position = global_position
+	
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
@@ -317,7 +324,6 @@ func respawn() -> void:
 	else:
 		get_tree().reload_current_scene()
 
-
 func _on_sword_hitbox_area_entered(area: Area3D) -> void:
 	var parent_node = area.get_parent()
 	
@@ -353,3 +359,38 @@ func play_alert_animation(text_to_show: String) -> void:
 	# Hide it cleanly once the fade finishes
 	fade_tween.finished.connect(func(): alert_label.visible = false)
 	
+func reset_to_safe_ground() -> void:
+	if is_dead: return
+	
+	print("Player fell into water! Resetting to safe ground.")
+	
+	# 1. Deduct 1 full heart (2 health units)
+	current_health_units -= 2
+	current_health_units = clamp(current_health_units, 0, max_health * 2)
+	health_changed.emit(current_health_units)
+	
+	if current_health_units <= 0:
+		die()
+		return
+	
+	# 2. Freeze movement vectors so they don't carry falling momentum
+	velocity = Vector3.ZERO
+	knockback_velocity = Vector3.ZERO
+	
+	# 3. MODIFIED TELEPORTATION: Keep the X and Z from where they safely walked, 
+	# but force the Y axis flat onto the floor (0.0).
+	global_position = last_safe_ground_position
+	
+	# 4. FORCE CONTROLS BACK ON IMMEDIATELY
+	controls_active = true
+	
+	# 5. FORCE STATE MACHINE UNLOCK
+	if state_machine:
+		state_machine.set_active(true)
+		state_machine.dispatch("to_idle")
+		print("Player State forced back to Idle. Respawn Position: ", global_position)
+	
+	# 6. Play the blue water hazard flash effect
+	var tween = create_tween()
+	tween.tween_property(sprite, "modulate", Color(0, 0, 1), 0.15) # Tint blue
+	tween.tween_property(sprite, "modulate", Color(1, 1, 1), 0.15)

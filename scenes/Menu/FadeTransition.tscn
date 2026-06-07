@@ -1,0 +1,72 @@
+[gd_scene format=3 uid="uid://cde4uxu2u4kjf"]
+
+[ext_resource type="Script" uid="uid://brrrft5cox4t5" path="res://scripts/fade_transition.gd" id="1_bosvk"]
+
+[sub_resource type="Animation" id="Animation_wubdc"]
+resource_name = "FadeIn"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_bosvk"]
+resource_name = "FadeOut"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_roj2o"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_p1gu0"]
+_data = {
+&"FadeIn": SubResource("Animation_wubdc"),
+&"FadeOut": SubResource("Animation_bosvk"),
+&"RESET": SubResource("Animation_roj2o")
+}
+
+[node name="FadeTransition" type="Control" unique_id=1929170299]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+script = ExtResource("1_bosvk")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1113241954]
+root_node = NodePath("../Color")
+libraries/ = SubResource("AnimationLibrary_p1gu0")
+
+[node name="Color" type="ColorRect" parent="." unique_id=1473285849]
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+color = Color(0, 0, 0, 0)

@@ -1,7 +1,6 @@
 [gd_resource type="VisualShader" format=3 uid="uid://u3p5vq84yx0c"]
 
 [ext_resource type="Texture2D" uid="uid://ea0k80y8o3lq" path="res://assets/textures/entities/portal/T_VFX_CircleFit1.png" id="1_jfyb7"]
-[ext_resource type="Texture2D" uid="uid://bthast6k1qrfd" path="res://icon.svg" id="2_cun0m"]
 
 [sub_resource type="VisualShaderNodeVectorOp" id="VisualShaderNodeVectorOp_6i57m"]
 default_input_values = [0, Quaternion(0, 0, 0, 0), 1, Quaternion(0, 0, 0, 0)]
@@ -48,7 +47,6 @@ default_value_enabled = true
 default_value = Color(0, 0.7917869, 1, 1)
 
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_5oeh1"]
-texture = ExtResource("2_cun0m")
 texture_type = 1
 
 [resource]

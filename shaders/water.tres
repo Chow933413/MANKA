@@ -13,7 +13,7 @@ operator = 5
 [sub_resource type="VisualShaderNodeColorParameter" id="VisualShaderNodeColorParameter_wjwk1"]
 parameter_name = "ColorParameter"
 default_value_enabled = true
-default_value = Color(0.19370747, 0.38079882, 0.343653, 1)
+default_value = Color(0.19607843, 0.36078432, 0.3529412, 1)
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_sxtts"]
 noise_type = 2

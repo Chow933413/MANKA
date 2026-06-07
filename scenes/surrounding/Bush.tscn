@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://c16by4dvk3qnk"]
 
-[ext_resource type="Texture2D" uid="uid://crmol8ca8rhw1" path="res://assets/textures/bush.png" id="1_l7x1l"]
+[ext_resource type="Texture2D" uid="uid://crmol8ca8rhw1" path="res://assets/textures/surroundings/bush.png" id="1_l7x1l"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ai5yx"]
 transparency = 1

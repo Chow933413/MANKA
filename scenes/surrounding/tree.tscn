@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://c6mkqjn60tnbc"]
 
-[ext_resource type="Texture2D" uid="uid://qu05b450ehb5" path="res://assets/textures/tree.png" id="1_x700n"]
+[ext_resource type="Texture2D" uid="uid://qu05b450ehb5" path="res://assets/textures/surroundings/tree.png" id="1_x700n"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x700n"]
 transparency = 2

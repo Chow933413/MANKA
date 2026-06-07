@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dk6inwch46lcq"]
 
-[ext_resource type="Texture2D" uid="uid://baj75grw8gs74" path="res://assets/textures/flowerbush.png" id="1_tftma"]
+[ext_resource type="Texture2D" uid="uid://baj75grw8gs74" path="res://assets/textures/surroundings/flowerbush.png" id="1_tftma"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ai5yx"]
 transparency = 2

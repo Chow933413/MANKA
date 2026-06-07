@@ -11,20 +11,26 @@ config_version=5
 [application]
 
 config/name="2.5D"
-run/main_scene="uid://c1qw27je11l5b"
+run/main_scene="uid://clwun6ed0ciga"
 config/features=PackedStringArray("4.6", "Forward Plus")
-config/icon="res://icon.svg"
 
 [autoload]
 
 NavigationManager="*uid://b1s2fgue4inr4"
 DialogueManager="*uid://bm27ls23fu0qs"
+FadeTransition="*uid://cde4uxu2u4kjf"
+
+[display]
+
+window/stretch/mode="viewport"
+window/stretch/aspect="expand"
 
 [global_group]
 
 player=""
 Boss=""
 TeleportRange=""
+LevelPortal=""
 
 [input]
 

@@ -2,7 +2,7 @@ extends StaticBody3D
 
 @export_category("Loot Settings")
 @export var loot_scene: PackedScene 
-@export var loot_word: String = "wood"
+@export var loot_word: String = ""
 
 @export_category("Destruction Settings")
 @export var broken_model: PackedScene
