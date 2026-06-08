@@ -10,13 +10,13 @@
 [ext_resource type="PackedScene" uid="uid://c5l32mvgwdfdc" path="res://scenes/entities/tokens.tscn" id="7_2r1tl"]
 [ext_resource type="PackedScene" uid="uid://cde54ehtm172h" path="res://scenes/surrounding/WitchHut.scn" id="8_plydf"]
 [ext_resource type="PackedScene" uid="uid://dabnpdy5s8qsn" path="res://scenes/surrounding/Water.tscn" id="9_1xax6"]
+[ext_resource type="PackedScene" uid="uid://c4iv8t7xl8ajr" path="res://scenes/effects/explosionVFX.tscn" id="9_gvm5i"]
 [ext_resource type="PackedScene" uid="uid://c6mkqjn60tnbc" path="res://scenes/surrounding/tree.tscn" id="11_nkeig"]
 [ext_resource type="PackedScene" uid="uid://c16by4dvk3qnk" path="res://scenes/surrounding/Bush.tscn" id="12_nfihu"]
 [ext_resource type="PackedScene" uid="uid://7icce5yxvly6" path="res://scenes/surrounding/Lilypad.tscn" id="13_g7tkf"]
 [ext_resource type="PackedScene" uid="uid://dk6inwch46lcq" path="res://scenes/surrounding/FlowerBush.tscn" id="13_lgguw"]
 [ext_resource type="PackedScene" uid="uid://cduv5eec6ojv5" path="res://scenes/entities/Fire Potion.tscn" id="14_4fww7"]
 [ext_resource type="PackedScene" uid="uid://vomajn7704yg" path="res://scenes/surrounding/cauldron.tscn" id="15_gvm5i"]
-[ext_resource type="PackedScene" uid="uid://dhx5m3hqa7taa" path="res://scenes/effects/explosion.tscn" id="16_1xax6"]
 [ext_resource type="PackedScene" uid="uid://b25shoofy7xnq" path="res://scenes/surrounding/campfire.scn" id="18_g7tkf"]
 [ext_resource type="PackedScene" uid="uid://db2uqgqe4dsst" path="res://scenes/entities/logpile.scn" id="19_4fww7"]
 [ext_resource type="PackedScene" uid="uid://cww5qfciqdpq0" path="res://scenes/entities/crates.scn" id="20_gvm5i"]
@@ -62,11 +62,12 @@ transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -16.814064, 0.9247596, 
 visible = false
 collision_mask = 2
 target_scene = "uid://dqpbvtoslfen0"
+portal_id = "Portal_1"
+target_portal_id = "Portal_2"
 is_locked = true
 
 [node name="Portal" parent="." unique_id=1616537689 instance=ExtResource("1_4tcl0")]
 transform = Transform3D(-2.1855694e-08, 0, 0.5, 0, 0.5, 0, -0.5, 0, -2.1855694e-08, 1.2238458, 1.0950809, 0.10908502)
-portal_id = "1"
 
 [node name="Player" parent="." unique_id=319351506 instance=ExtResource("2_dd0lh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4341421, 0)
@@ -106,13 +107,17 @@ transform = Transform3D(0.6666667, 0, 0, 0, 0.6666667, 0, 0, 0, 0.6666667, 0.339
 transform = Transform3D(0.53333336, 0, 0, 0, 0.53333336, 0, 0, 0, 0.53333336, -1.2220545, -0.7802251, 1.4377197)
 spawn_point_path = NodePath("Marker3D")
 spawn_point_path2 = NodePath("explosion")
-explosion_scene = ExtResource("16_1xax6")
+explosion_scene = ExtResource("9_gvm5i")
 
 [node name="Marker3D" type="Marker3D" parent="Witch/Cauldron" unique_id=2017301881]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.23530233, 0.9032905)
 
 [node name="explosion" type="Marker3D" parent="Witch/Cauldron" unique_id=1305285990]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.087156296, 0, 0)
+
+[node name="tokens" parent="Witch" unique_id=1033267743 instance=ExtResource("7_2r1tl")]
+transform = Transform3D(0.6666667, 0, 0, 0, 0.6666667, 0, 0, 0, 0.6666667, -0.614336, -0.94107974, 3.7860308)
+descriptive_word = "Spider Eye"
 
 [node name="Map" type="Node3D" parent="." unique_id=1519502220]
 
@@ -7099,7 +7104,7 @@ transform = Transform3D(-2.1855695e-07, 0, 5, 0, 5, 0, -5, 0, -2.1855695e-07, -1
 [node name="FirePotion" parent="Map" unique_id=504721792 instance=ExtResource("14_4fww7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.6498203, 0.5596573, -0.015448928)
 
-[node name="tokens" parent="Map" unique_id=1033267743 instance=ExtResource("7_2r1tl")]
+[node name="tokens" parent="Map" unique_id=1598849597 instance=ExtResource("7_2r1tl")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.071423, 0.15098327, 52.585434)
 descriptive_word = "Frog Leg"
 

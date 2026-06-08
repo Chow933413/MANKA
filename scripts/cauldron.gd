@@ -78,10 +78,23 @@ func trigger_cauldron_explosion():
 	
 	if explosion_scene:
 		var spawn_pos = spawn_point_path2.global_position if spawn_point_path2 else global_position
+		
+		# 1. Properly instantiate the scene
 		var exp_instance = explosion_scene.instantiate()
 		
+		# 2. Add it to your active world scene first
 		get_tree().current_scene.add_child(exp_instance)
 		exp_instance.global_position = spawn_pos
+		
+		# 3. Look for the AnimationPlayer inside the instance and play it
+		if exp_instance.has_node("AnimationPlayer"):
+			exp_instance.get_node("AnimationPlayer").play("init")
+		elif exp_instance is AnimationPlayer:
+			exp_instance.play("init")
+		else:
+			# If the script is attached to the root of the explosion scene, 
+			# and it has its own method or internal reference, call it here.
+			print("Warning: Could not automatically find AnimationPlayer on explosion instance.")
 	else:
 		print("Warning: No explosion_scene assigned in Inspector!")
 	
