@@ -146,3 +146,9 @@ mesh = SubResource("ArrayMesh_fptqe")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="base/StaticBody3D" unique_id=1418555331]
 shape = SubResource("ConcavePolygonShape3D_4ie2s")
+
+[node name="InteractionPrompt" type="Label3D" parent="." unique_id=995389302]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5101974, 0)
+visible = false
+text = "Press [E] to Interact"
+font_size = 24

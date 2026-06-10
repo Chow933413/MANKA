@@ -84,10 +84,6 @@ shader_parameter/ColorParameter = Color(0.188235, 0.396078, 0.780392, 1)
 material = SubResource("ShaderMaterial_d3ub6")
 size = Vector2(100, 100)
 
-[sub_resource type="BoxMesh" id="BoxMesh_a76di"]
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_ng1gw"]
-
 [sub_resource type="BoxShape3D" id="BoxShape3D_yxkm4"]
 size = Vector3(1, 8, 10.881)
 
@@ -99,6 +95,75 @@ size = Vector3(1, 8, 4.807556)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_db1u1"]
 size = Vector3(1, 8, 9.870789)
+
+[sub_resource type="GDScript" id="GDScript_fj52k"]
+script/source = "extends Area3D
+
+@export_category(\"Tutorial Message\")
+@export_multiline var message_text: String = \"Press WASD to Move\"
+
+func _ready() -> void:
+	# Connect both entry and exit signals
+	area_entered.connect(_on_area_entered)
+	area_exited.connect(_on_area_exited)
+
+func _on_area_entered(area: Area3D) -> void:
+	var player = area.get_parent()
+	if player and player.has_node(\"Label3D\"):
+		var alert_label = player.get_node(\"Label3D\")
+		
+		# Show the text over the player's head immediately
+		alert_label.text = message_text
+		alert_label.visible = true
+		alert_label.modulate.a = 1.0
+		alert_label.scale = Vector3.ONE
+
+func _on_area_exited(area: Area3D) -> void:
+	var player = area.get_parent()
+	if player and player.has_node(\"Label3D\"):
+		var alert_label = player.get_node(\"Label3D\")
+		
+		# Cleanly fade out and hide the label the moment they step away
+		var tween = create_tween()
+		tween.tween_property(alert_label, \"modulate:a\", 0.0, 0.2)
+		tween.finished.connect(func(): alert_label.visible = false)
+"
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ng1gw"]
+size = Vector3(1.4915771, 1.0603027, 1.8657227)
+
+[sub_resource type="GDScript" id="GDScript_1t5oo"]
+script/source = "extends Area3D
+
+@export_category(\"Tutorial Message\")
+@export_multiline var message_text: String = \"Left Click to Attack\"
+
+func _ready() -> void:
+	# Connect both entry and exit signals
+	area_entered.connect(_on_area_entered)
+	area_exited.connect(_on_area_exited)
+
+func _on_area_entered(area: Area3D) -> void:
+	var player = area.get_parent()
+	if player and player.has_node(\"Label3D\"):
+		var alert_label = player.get_node(\"Label3D\")
+		
+		# Show the text over the player's head immediately
+		alert_label.text = message_text
+		alert_label.visible = true
+		alert_label.modulate.a = 1.0
+		alert_label.scale = Vector3.ONE
+
+func _on_area_exited(area: Area3D) -> void:
+	var player = area.get_parent()
+	if player and player.has_node(\"Label3D\"):
+		var alert_label = player.get_node(\"Label3D\")
+		
+		# Cleanly fade out and hide the label the moment they step away
+		var tween = create_tween()
+		tween.tween_property(alert_label, \"modulate:a\", 0.0, 0.2)
+		tween.finished.connect(func(): alert_label.visible = false)
+"
 
 [node name="level 0" type="Node3D" unique_id=1730428891]
 script = SubResource("GDScript_7s2gi")
@@ -1863,16 +1928,6 @@ transform = Transform3D(-3.059797e-08, 0.7, -3.059797e-08, 0, -3.059797e-08, -0.
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.327066, -1.0068474, 0)
 mesh = SubResource("PlaneMesh_a76di")
 
-[node name="hitbox" type="Area3D" parent="." unique_id=2008895083]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.9113641, 0.5717212, -0.31325275)
-collision_mask = 2
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="hitbox" unique_id=332288181]
-mesh = SubResource("BoxMesh_a76di")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="hitbox" unique_id=881261808]
-shape = SubResource("BoxShape3D_ng1gw")
-
 [node name="sign" parent="." unique_id=1009123843 node_paths=PackedStringArray("invisible_border") instance=ExtResource("10_a76di")]
 transform = Transform3D(0.50606376, 0, 0.862496, 0, 1, 0, -0.862496, 0, 0.50606376, 10.353927, 0.7740006, 4.1159325)
 invisible_border = NodePath("../InvisibleBorder")
@@ -1911,3 +1966,19 @@ metadata/_editor_floor_ = Vector3(0, -1, 0)
 
 [node name="FadeTransition" parent="." unique_id=1929170299 instance=ExtResource("13_1t5oo")]
 visible = false
+
+[node name="MovementTutorialTrigger" type="Area3D" parent="." unique_id=112766964]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.3743064, 0, 0.7790624)
+script = SubResource("GDScript_fj52k")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MovementTutorialTrigger" unique_id=1538960536]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.19386244, 0.17907715, -0.43286133)
+shape = SubResource("BoxShape3D_ng1gw")
+
+[node name="AttackTutorialTrigger" type="Area3D" parent="." unique_id=1420815077]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.11786, 0, -7.4853344)
+script = SubResource("GDScript_1t5oo")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="AttackTutorialTrigger" unique_id=854470848]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.19386244, 0.17907715, -0.43286133)
+shape = SubResource("BoxShape3D_ng1gw")

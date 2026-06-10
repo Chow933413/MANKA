@@ -480,3 +480,9 @@ light_indirect_energy = 0.0
 light_volumetric_fog_energy = 0.0
 shadow_enabled = true
 omni_range = 0.5903227
+
+[node name="InteractionPrompt" type="Label3D" parent="." unique_id=1878947005]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.48832843, 0)
+text = "Press [E] to Interact"
+font_size = 12
+outline_size = 8

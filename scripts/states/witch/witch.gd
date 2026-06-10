@@ -13,6 +13,9 @@ var current_health: int = 3
 @onready var projectile_spawn: Marker3D = $ProjectileSpawn
 @onready var sprite: Sprite3D = $Sprite3D
 
+# --- NEW: Grab your floating Label3D prompt ---
+@onready var interaction_prompt: Label3D = $InteractionPrompt
+
 var has_talked_this_visit: bool = false
 var is_invulnerable: bool = false
 
@@ -20,23 +23,50 @@ func _ready() -> void:
 	current_health = max_health
 	state_machine.init(self)
 	
-	# --- FIXED: Target the actual InteractionArea node instead of the Hurtbox! ---
+	# --- MODIFIED: Listen for area sweeps instead of body signals ---
 	var interaction_area = $InteractionArea
 	if interaction_area:
-		if not interaction_area.body_exited.is_connected(_on_player_left_interaction):
-			interaction_area.body_exited.connect(_on_player_left_interaction)
+		interaction_area.area_entered.connect(_on_player_entered_interaction)
+		interaction_area.area_exited.connect(_on_player_left_interaction)
 	else:
 		print("Warning: InteractionArea node not found on Witch!")
+		
+	# Ensure the prompt starts completely hidden during the battle phase
+	if interaction_prompt:
+		interaction_prompt.hide()
+
+# --- NEW: Show prompt ONLY if she has permanently retreated to her hut ---
+func _on_player_entered_interaction(area: Area3D) -> void:
+	var parent_node = area.get_parent()
+	if parent_node and (parent_node.is_in_group("player") or parent_node.name == "Player" or area.name == "InteractionRange"):
+		if is_invulnerable and interaction_prompt:
+			interaction_prompt.show()
+
+# --- MODIFIED: Dynamic clean up on exit ---
+func _on_player_left_interaction(area: Area3D) -> void:
+	var parent_node = area.get_parent()
+	if parent_node and (parent_node.is_in_group("player") or parent_node.name == "Player" or area.name == "InteractionRange"):
+		has_talked_this_visit = false
+		print("Player left the Witch's InteractionArea. Resetting conversation status!")
+		if interaction_prompt:
+			interaction_prompt.hide()
 
 func interact() -> void:
-	# 1. NEW LOGIC: If she retreated to her hut, trigger her guidance dialogue!
+	# 1. If she retreated to her hut, trigger her guidance dialogue!
 	if is_invulnerable:
 		if has_talked_this_visit:
 			print("Witch: Player already talked to me this visit. Ignoring button press.")
 			return
 			
+		# Hide the prompt while the dialogue menu takes focus
+		if interaction_prompt:
+			interaction_prompt.hide()
+			
 		has_talked_this_visit = true
-		_play_guidance_dialogue()
+		await _play_guidance_dialogue()
+		
+		# Recheck if the player is still standing next to her to bring prompt back
+		_reshow_prompt_if_near()
 		return
 
 	# 2. DEFAULT COMBAT LOGIC: Only processed if she is still hostile
@@ -94,12 +124,19 @@ func _retreat_to_hut_permanently() -> void:
 	if hut_spot:
 		await teleport_to(hut_spot.global_position)
 		
+		# Checkpoint assignment fallback updates can reside here
+		if "current_checkpoint_name" in NavigationManager:
+			NavigationManager.current_checkpoint_name = "WitchHutRespawn"
+		
 	DialogueManager.start_dialogue("???", "Hehe... intriguing.")
 	while DialogueManager.is_dialogue_active:
 		await get_tree().physics_frame
 		
 	if animation_player.has_animation("Idle"):
 		animation_player.play("Idle")
+		
+	# Instantly sweep to see if the player is already right in front of her house spot!
+	_reshow_prompt_if_near()
 
 func _physics_process(delta: float) -> void:
 	if state_machine and state_machine.current_state: 
@@ -172,8 +209,14 @@ func teleport_away_from_player(min_range: float = 6.0, max_range: float = 10.0) 
 		)
 	
 	await teleport_to(best_spot)
+
+# Helper function to check proximity after dialogues finish or teleports land
+func _reshow_prompt_if_near():
+	if not is_invulnerable: return
 	
-func _on_player_left_interaction(body: Node3D) -> void:
-	if body.is_in_group("player") or body.name == "Player":
-		has_talked_this_visit = false
-		print("Player left the Witch's InteractionArea. Resetting conversation status!")
+	var player = get_tree().get_first_node_in_group("player")
+	if player and $InteractionArea:
+		var range_node = player.get_node_or_null("InteractionRange")
+		if range_node and $InteractionArea.overlaps_area(range_node):
+			if interaction_prompt:
+				interaction_prompt.show()

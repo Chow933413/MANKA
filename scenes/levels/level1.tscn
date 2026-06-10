@@ -70,7 +70,7 @@ is_locked = true
 transform = Transform3D(-2.1855694e-08, 0, 0.5, 0, 0.5, 0, -0.5, 0, -2.1855694e-08, 1.2238458, 1.0950809, 0.10908502)
 
 [node name="Player" parent="." unique_id=319351506 instance=ExtResource("2_dd0lh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4341421, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1915858, 0.4341421, 0)
 
 [node name="DialogueUi" parent="." unique_id=928536291 instance=ExtResource("5_dywbp")]
 
@@ -114,10 +114,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.23530233, 0.9032905)
 
 [node name="explosion" type="Marker3D" parent="Witch/Cauldron" unique_id=1305285990]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.087156296, 0, 0)
-
-[node name="tokens" parent="Witch" unique_id=1033267743 instance=ExtResource("7_2r1tl")]
-transform = Transform3D(0.6666667, 0, 0, 0, 0.6666667, 0, 0, 0, 0.6666667, -0.614336, -0.94107974, 3.7860308)
-descriptive_word = "Spider Eye"
 
 [node name="Map" type="Node3D" parent="." unique_id=1519502220]
 
