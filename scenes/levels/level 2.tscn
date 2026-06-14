@@ -3,7 +3,7 @@
 [ext_resource type="MeshLibrary" uid="uid://les21xne5sow" path="res://mesh_library/landscape_mesh.tres" id="1_qcat7"]
 [ext_resource type="PackedScene" uid="uid://d1e2u3fc5egv3" path="res://scenes/surrounding/portal.tscn" id="2_p5t0n"]
 [ext_resource type="PackedScene" uid="uid://bfo0cmvi43eb6" path="res://scenes/agents/player/player.tscn" id="3_p5t0n"]
-[ext_resource type="PackedScene" uid="uid://ctm6ar52sdoer" path="res://scenes/agents/npc/goblin.tscn" id="5_dr8r2"]
+[ext_resource type="PackedScene" uid="uid://ctm6ar52sdoer" path="res://scenes/agents/mobs/goblin.tscn" id="5_dr8r2"]
 
 [node name="Level2" type="Node3D" unique_id=75698069]
 
