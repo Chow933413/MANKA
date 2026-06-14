@@ -4,12 +4,11 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://cj0brv168q64"
-path="res://.godot/imported/Meshy_AI_Hearthlight_Hobbit_Co_0603091912_texture.glb-33c3897f3ce1a415e7b3148a02dd611c.scn"
+valid=false
 
 [deps]
 
 source_file="res://glb/witch house/Meshy_AI_Hearthlight_Hobbit_Co_0603091912_texture.glb"
-dest_files=["res://.godot/imported/Meshy_AI_Hearthlight_Hobbit_Co_0603091912_texture.glb-33c3897f3ce1a415e7b3148a02dd611c.scn"]
 
 [params]
 

@@ -4,12 +4,11 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://bkdd6jqjf14fh"
-path="res://.godot/imported/Meshy_AI_Logs_in_a_Stone_Ring_0607064129_texture.glb-ca8d68ef794542525fef7cac397ed0b4.scn"
+valid=false
 
 [deps]
 
 source_file="res://glb/campfire/Meshy_AI_Logs_in_a_Stone_Ring_0607064129_texture.glb"
-dest_files=["res://.godot/imported/Meshy_AI_Logs_in_a_Stone_Ring_0607064129_texture.glb-ca8d68ef794542525fef7cac397ed0b4.scn"]
 
 [params]
 

@@ -4,12 +4,11 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://cvx76ualvbs43"
-path="res://.godot/imported/cauldron.glb-81206548302dea0a01a692cf2b3bb443.scn"
+valid=false
 
 [deps]
 
 source_file="res://glb/cauldron/cauldron.glb"
-dest_files=["res://.godot/imported/cauldron.glb-81206548302dea0a01a692cf2b3bb443.scn"]
 
 [params]
 

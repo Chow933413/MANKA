@@ -13,6 +13,9 @@
 [ext_resource type="Script" uid="uid://btxbo0sl8a2pi" path="res://scripts/skeleton/death.gd" id="11_hmjh5"]
 [ext_resource type="Script" uid="uid://cv0xatfkrj3cn" path="res://scripts/skeleton/idle.gd" id="12_5o40y"]
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_5o40y"]
+radius = 5.0
+
 [sub_resource type="Animation" id="Animation_ggpme"]
 length = 0.001
 tracks/0/type = "value"
@@ -381,6 +384,13 @@ collision_layer = 4
 script = ExtResource("1_x3dcn")
 state_machine = NodePath("StateMachine")
 
+[node name="VisualArea" type="Area3D" parent="." unique_id=1677161825]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="VisualArea" unique_id=2027944028]
+shape = SubResource("SphereShape3D_5o40y")
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1790329693]
 root_node = NodePath("../Sprite3D")
 libraries/ = SubResource("AnimationLibrary_3oq8e")
@@ -416,7 +426,7 @@ shape = SubResource("CapsuleShape3D_d8mdq")
 
 [node name="StateMachine" type="Node" parent="." unique_id=1876306150 node_paths=PackedStringArray("initial_state")]
 script = ExtResource("7_bhnfr")
-initial_state = NodePath("Chase")
+initial_state = NodePath("Idle")
 
 [node name="Chase" type="Node" parent="StateMachine" unique_id=2095443200]
 script = ExtResource("7_06e3t")

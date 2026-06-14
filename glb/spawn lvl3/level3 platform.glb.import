@@ -4,12 +4,11 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://lggiiw7g37ls"
-path="res://.godot/imported/level3 platform.glb-b19a1634810a6926ed933462646cd75f.scn"
+valid=false
 
 [deps]
 
 source_file="res://glb/spawn lvl3/level3 platform.glb"
-dest_files=["res://.godot/imported/level3 platform.glb-b19a1634810a6926ed933462646cd75f.scn"]
 
 [params]
 

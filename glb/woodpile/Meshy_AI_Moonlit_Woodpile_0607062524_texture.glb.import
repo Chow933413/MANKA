@@ -4,12 +4,11 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://r1jeirl2vg1e"
-path="res://.godot/imported/Meshy_AI_Moonlit_Woodpile_0607062524_texture.glb-781505c81152434408c6f372a096c30e.scn"
+valid=false
 
 [deps]
 
 source_file="res://glb/woodpile/Meshy_AI_Moonlit_Woodpile_0607062524_texture.glb"
-dest_files=["res://.godot/imported/Meshy_AI_Moonlit_Woodpile_0607062524_texture.glb-781505c81152434408c6f372a096c30e.scn"]
 
 [params]
 

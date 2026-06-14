@@ -4,12 +4,11 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://bl67d266w313"
-path="res://.godot/imported/woodpile_broken.glb-6baf3e313e2f92b02d5a7358169ff231.scn"
+valid=false
 
 [deps]
 
 source_file="res://glb/woodpile/woodpile_broken.glb"
-dest_files=["res://.godot/imported/woodpile_broken.glb-6baf3e313e2f92b02d5a7358169ff231.scn"]
 
 [params]
 

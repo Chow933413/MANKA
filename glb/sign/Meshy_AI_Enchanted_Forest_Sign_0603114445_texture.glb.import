@@ -4,12 +4,11 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://b1oonbd584h1s"
-path="res://.godot/imported/Meshy_AI_Enchanted_Forest_Sign_0603114445_texture.glb-8e9230fea4e56fcdb52f9610589007d0.scn"
+valid=false
 
 [deps]
 
 source_file="res://glb/sign/Meshy_AI_Enchanted_Forest_Sign_0603114445_texture.glb"
-dest_files=["res://.godot/imported/Meshy_AI_Enchanted_Forest_Sign_0603114445_texture.glb-8e9230fea4e56fcdb52f9610589007d0.scn"]
 
 [params]
 

@@ -4,12 +4,11 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://d0uq4tdum7cfk"
-path="res://.godot/imported/Meshy_AI_Solar_Lattice_Orb_0602134435_texture.glb-2d8b7c3c5a568c916931166766d04067.scn"
+valid=false
 
 [deps]
 
 source_file="res://glb/tokens/Meshy_AI_Solar_Lattice_Orb_0602134435_texture.glb"
-dest_files=["res://.godot/imported/Meshy_AI_Solar_Lattice_Orb_0602134435_texture.glb-2d8b7c3c5a568c916931166766d04067.scn"]
 
 [params]
 

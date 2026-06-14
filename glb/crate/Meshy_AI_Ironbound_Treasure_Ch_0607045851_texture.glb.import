@@ -4,12 +4,11 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://ds0mgggruacuk"
-path="res://.godot/imported/Meshy_AI_Ironbound_Treasure_Ch_0607045851_texture.glb-08938836e25b5ba39a4ddb4013126894.scn"
+valid=false
 
 [deps]
 
 source_file="res://glb/crate/Meshy_AI_Ironbound_Treasure_Ch_0607045851_texture.glb"
-dest_files=["res://.godot/imported/Meshy_AI_Ironbound_Treasure_Ch_0607045851_texture.glb-08938836e25b5ba39a4ddb4013126894.scn"]
 
 [params]
 

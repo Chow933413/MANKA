@@ -4,12 +4,11 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://dx7djoep7dynv"
-path="res://.godot/imported/health_potion.glb-ebb2295b496e0ac617942f17f29d5e9e.scn"
+valid=false
 
 [deps]
 
 source_file="res://glb/potion/health_potion.glb"
-dest_files=["res://.godot/imported/health_potion.glb-ebb2295b496e0ac617942f17f29d5e9e.scn"]
 
 [params]
 

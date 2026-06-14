@@ -4,12 +4,11 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://c5kjk0jb7ho0m"
-path="res://.godot/imported/crates_broken.glb-b526f291891a75da4cb0093cae26c113.scn"
+valid=false
 
 [deps]
 
 source_file="res://glb/crate/crates_broken.glb"
-dest_files=["res://.godot/imported/crates_broken.glb-b526f291891a75da4cb0093cae26c113.scn"]
 
 [params]
 

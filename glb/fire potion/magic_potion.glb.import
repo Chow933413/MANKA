@@ -4,12 +4,11 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://csy6rqoycd1ka"
-path="res://.godot/imported/magic_potion.glb-ee088f5e6b463ea0a3f08c0a551fe406.scn"
+valid=false
 
 [deps]
 
 source_file="res://glb/fire potion/magic_potion.glb"
-dest_files=["res://.godot/imported/magic_potion.glb-ee088f5e6b463ea0a3f08c0a551fe406.scn"]
 
 [params]
 

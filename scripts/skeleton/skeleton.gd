@@ -5,12 +5,13 @@ extends CharacterBody3D
 
 @export_category("Combat Stats")
 @export var speed: float = 2.0
-@export var attack_range: float = 0.5
+@export var attack_range: float = 0.5 # Boosted slightly from 0.5 for 3D clearance
 @export var max_health: int = 3
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var sprite: Sprite3D = $Sprite3D
 @onready var sword_hitbox: Area3D = $SwordHitbox
+@onready var vision_area: Area3D = $VisualArea # <-- Link your new Area3D node here!
 
 var hitbox_position: float = 0.0	
 
@@ -20,6 +21,9 @@ var local_hitbox_x: float = 0.0
 var is_dead: bool = false
 var is_hurt: bool = false
 
+# This variable still holds the player tracking link for Idle and Chase states
+var player_target: CharacterBody3D = null
+
 func _ready() -> void:
 	current_health = max_health
 	if sword_hitbox:
@@ -27,37 +31,49 @@ func _ready() -> void:
 		
 	player = get_tree().get_first_node_in_group("player") as CharacterBody3D
 	
+	# Connect our Area3D entry and exit signals via code automatically
+	if vision_area:
+		vision_area.body_entered.connect(_on_vision_area_body_entered)
+		vision_area.body_exited.connect(_on_vision_area_body_exited)
+	
 	if state_machine and state_machine.has_method("init"):
 		state_machine.init(self)
 
 func _physics_process(delta: float) -> void:
-	# 1. APPLY GRAVITY CONSTANTLY HERE
+	# Apply gravity constantly
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 		
 	if not player:
 		player = get_tree().get_first_node_in_group("player") as CharacterBody3D
 		
-	# 2. FIXED: Call 'physics_update' to match your state machine manager's method!
+	# Call state machine manager update method
 	if state_machine and state_machine.has_method("physics_update"):
 		state_machine.physics_update(delta)
 		
-	# 3. Process calculations into physical workspace movement
 	move_and_slide()
+
+# ─── AREA3D DETECTION SIGNALS ───
+func _on_vision_area_body_entered(body: Node3D) -> void:
+	if is_dead: return
+	if body.is_in_group("player") or body == player:
+		player_target = body as CharacterBody3D
+		print("[VISION] Player stepped inside range! Target saved.")
+
+func _on_vision_area_body_exited(body: Node3D) -> void:
+	if body == player_target:
+		player_target = null
+		print("[VISION] Player walked out of range! Target lost.")
 
 func update_facing_direction(dir_x: float) -> void:
 	if dir_x == 0 or is_dead: return
 	
-	# 1. Flip the 2D visual sprite sheet
 	sprite.flip_h = dir_x < 0
 	
-	# 2. Rotate the hitbox instead of moving it!
 	if sword_hitbox:
 		if dir_x > 0:
-			# Facing Right: Set rotation to 0 degrees (Standard)
 			sword_hitbox.rotation_degrees.y = 0
 		elif dir_x < 0:
-			# Facing Left: Rotate 180 degrees to flip it to the other side
 			sword_hitbox.rotation_degrees.y = 180
 
 func play_animation(anim_name: String) -> void:
@@ -66,10 +82,9 @@ func play_animation(anim_name: String) -> void:
 
 func take_damage(amount: int = 1) -> void:
 	if is_dead: return
-	
 	current_health -= amount
 	if current_health <= 0:
-		_die() # Triggers death state when health hits zero
+		_die() 
 	else:
 		_trigger_hurt_state()
 
@@ -81,7 +96,6 @@ func _trigger_hurt_state() -> void:
 
 func _die() -> void:
 	is_dead = true
-	
-	# Hand complete control over to your Death node!
+	player_target = null # Drop tracking on death
 	if state_machine and state_machine.has_method("change_state"):
 		state_machine.change_state("death")

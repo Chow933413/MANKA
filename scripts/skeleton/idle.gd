@@ -8,6 +8,6 @@ func physics_update(_delta: float) -> void:
 	actor.velocity.z = 0
 	actor.play_animation("idle")
 	
-	# If the vision detection signals found a player target, swap to chase!
+	# If the vision area bubble signals found a player target, swap to chase!
 	if actor.player_target != null:
 		state_machine.change_state("chase")
