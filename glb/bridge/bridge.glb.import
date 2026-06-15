@@ -4,11 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://d5u8l26yj1hs"
-valid=false
+path="res://.godot/imported/bridge.glb-d5aeaf520b17886c4ac0d6b5bbe1669b.scn"
 
 [deps]
 
 source_file="res://glb/bridge/bridge.glb"
+dest_files=["res://.godot/imported/bridge.glb-d5aeaf520b17886c4ac0d6b5bbe1669b.scn"]
 
 [params]
 

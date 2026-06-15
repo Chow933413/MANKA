@@ -1,0 +1,49 @@
+[gd_scene format=3 uid="uid://crjkd13dwpsld"]
+
+[ext_resource type="Script" uid="uid://2me3tss3y73n" path="res://scripts/end_menu.gd" id="1_omp4h"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_c7t4d"]
+font_size = 48
+
+[node name="EndMenu" type="Control" unique_id=417124468]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_omp4h")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=435662111]
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+color = Color(0, 0, 0, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1039169196]
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+alignment = 1
+
+[node name="Label" type="Label" parent="VBoxContainer" unique_id=1546176197]
+layout_mode = 2
+text = "THE END"
+label_settings = SubResource("LabelSettings_c7t4d")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Control" type="Control" parent="VBoxContainer" unique_id=323212612]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+
+[node name="mainmenu" type="Button" parent="VBoxContainer" unique_id=992692337]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Return to Main Menu"
+
+[node name="quit" type="Button" parent="VBoxContainer" unique_id=1033406942]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_stretch_ratio = 2.0
+text = "Quit Game"

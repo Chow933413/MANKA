@@ -2,6 +2,9 @@ extends Control
 
 var button_type = null
 
+func _ready() -> void:
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+
 func _on_play_pressed() -> void:
 	$FadeTransition.show()
 	$FadeTransition/Timer.start()
