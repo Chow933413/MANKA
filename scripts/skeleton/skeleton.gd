@@ -8,6 +8,10 @@ extends CharacterBody3D
 @export var attack_range: float = 0.5 # Boosted slightly from 0.5 for 3D clearance
 @export var max_health: int = 3
 
+@export_category("Loot Settings")
+@export var loot_drop_scene: PackedScene = null
+@export var loot_word: String = ""
+
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var sprite: Sprite3D = $Sprite3D
 @onready var sword_hitbox: Area3D = $SwordHitbox
@@ -53,17 +57,15 @@ func _physics_process(delta: float) -> void:
 		
 	move_and_slide()
 
-# ─── AREA3D DETECTION SIGNALS ───
 func _on_vision_area_body_entered(body: Node3D) -> void:
 	if is_dead: return
 	if body.is_in_group("player") or body == player:
 		player_target = body as CharacterBody3D
-		print("[VISION] Player stepped inside range! Target saved.")
 
 func _on_vision_area_body_exited(body: Node3D) -> void:
 	if body == player_target:
 		player_target = null
-		print("[VISION] Player walked out of range! Target lost.")
+
 
 func update_facing_direction(dir_x: float) -> void:
 	if dir_x == 0 or is_dead: return
@@ -96,6 +98,21 @@ func _trigger_hurt_state() -> void:
 
 func _die() -> void:
 	is_dead = true
-	player_target = null # Drop tracking on death
+	player_target = null
+	
+	if loot_drop_scene:
+		_spawn_loot()
+		
 	if state_machine and state_machine.has_method("change_state"):
 		state_machine.change_state("death")
+		
+func _spawn_loot() -> void:
+	var item_instance = loot_drop_scene.instantiate() as Node3D
+	if item_instance:
+		# Check if the spawned item supports our dynamic recipe descriptive word labels
+		if "descriptive_word" in item_instance:
+			item_instance.descriptive_word = loot_word
+		
+		get_parent().add_child(item_instance)
+		
+		item_instance.global_position = global_position + Vector3(0, 0.2, 0)

@@ -4,13 +4,13 @@
 [ext_resource type="PackedScene" uid="uid://dqs1ke42p4dd4" path="res://scenes/entities/barrel.tscn" id="2_vals0"]
 [ext_resource type="PackedScene" uid="uid://c5l32mvgwdfdc" path="res://scenes/entities/tokens.tscn" id="3_oem7y"]
 [ext_resource type="PackedScene" uid="uid://vomajn7704yg" path="res://scenes/surrounding/cauldron.tscn" id="4_a76di"]
-[ext_resource type="PackedScene" uid="uid://x3cknfiaall6" path="res://scenes/surrounding/bridge.tscn" id="5_d3ub6"]
 [ext_resource type="PackedScene" uid="uid://c6mkqjn60tnbc" path="res://scenes/surrounding/tree.tscn" id="6_7s2gi"]
 [ext_resource type="PackedScene" uid="uid://d1e2u3fc5egv3" path="res://scenes/surrounding/portal.tscn" id="7_fj52k"]
 [ext_resource type="MeshLibrary" uid="uid://les21xne5sow" path="res://mesh_library/landscape_mesh.tres" id="8_vals0"]
 [ext_resource type="Shader" uid="uid://batk14s1dymoq" path="res://shaders/water.tres" id="9_oem7y"]
 [ext_resource type="PackedScene" uid="uid://dqrxrpvip3rac" path="res://scenes/surrounding/sign.scn" id="10_a76di"]
 [ext_resource type="PackedScene" uid="uid://cepi0m77ntr0j" path="res://scenes/GUI/Dialogue UI/DialogueUI.tscn" id="11_d3ub6"]
+[ext_resource type="PackedScene" uid="uid://7rgrejmhneju" path="res://scenes/surrounding/fence.scn" id="12_7s2gi"]
 [ext_resource type="PackedScene" uid="uid://cde4uxu2u4kjf" path="res://scenes/Menu/FadeTransition.tscn" id="13_1t5oo"]
 
 [sub_resource type="GDScript" id="GDScript_7s2gi"]
@@ -83,18 +83,6 @@ shader_parameter/ColorParameter = Color(0.188235, 0.396078, 0.780392, 1)
 [sub_resource type="PlaneMesh" id="PlaneMesh_a76di"]
 material = SubResource("ShaderMaterial_d3ub6")
 size = Vector2(100, 100)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_yxkm4"]
-size = Vector3(1, 8, 10.881)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_3ebcg"]
-size = Vector3(7.911133, 7.658539, 0.86865234)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_luu1i"]
-size = Vector3(1, 8, 4.807556)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_db1u1"]
-size = Vector3(1, 8, 9.870789)
 
 [sub_resource type="GDScript" id="GDScript_fj52k"]
 script/source = "extends Area3D
@@ -181,7 +169,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5389011, 0.54695535, 0.387
 
 [node name="Cauldron" parent="." unique_id=2138511628 node_paths=PackedStringArray("spawn_point_path") instance=ExtResource("4_a76di")]
 transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 28.879896, 0.26250133, 2.9569368)
-bridge_scene = ExtResource("5_d3ub6")
 spawn_point_path = NodePath("Marker3D")
 
 [node name="Marker3D" type="Marker3D" parent="Cauldron" unique_id=1111271142]
@@ -1930,28 +1917,7 @@ mesh = SubResource("PlaneMesh_a76di")
 
 [node name="sign" parent="." unique_id=1009123843 node_paths=PackedStringArray("invisible_border") instance=ExtResource("10_a76di")]
 transform = Transform3D(0.50606376, 0, 0.862496, 0, 1, 0, -0.862496, 0, 0.50606376, 10.353927, 0.7740006, 4.1159325)
-invisible_border = NodePath("../InvisibleBorder")
-
-[node name="InvisibleBorder" type="StaticBody3D" parent="." unique_id=106147859]
-transform = Transform3D(0.9999997, 0, 0, 0, 1, 0, 0, 0, 0.9999997, 12.850724, 0.4937057, -2.1310763)
-collision_layer = 32
-collision_mask = 0
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="InvisibleBorder" unique_id=419651937]
-transform = Transform3D(0.9999917, 0, 0, 0, 1, 0, 0, 0, 0.9999917, 0.18126011, 1.2466521, -0.31868696)
-shape = SubResource("BoxShape3D_yxkm4")
-
-[node name="CollisionShape3D2" type="CollisionShape3D" parent="InvisibleBorder" unique_id=853248514]
-transform = Transform3D(0.99999005, 0, 0, 0, 1, 0, 0, 0, 0.99999005, -3.4555607, 1.4405365, -4.977345)
-shape = SubResource("BoxShape3D_3ebcg")
-
-[node name="CollisionShape3D3" type="CollisionShape3D" parent="InvisibleBorder" unique_id=761089858]
-transform = Transform3D(-4.3710607e-08, 0, 0.9999846, 0, 1, 0, -0.9999846, 0, -4.3710607e-08, 2.0833702, 1.2568889, 4.6631746)
-shape = SubResource("BoxShape3D_luu1i")
-
-[node name="CollisionShape3D4" type="CollisionShape3D" parent="InvisibleBorder" unique_id=1863460804]
-transform = Transform3D(0.999988, 0, 0, 0, 1, 0, 0, 0, 0.999988, 3.7477512, 1.2174201, 9.045913)
-shape = SubResource("BoxShape3D_db1u1")
+invisible_border = NodePath("../fence")
 
 [node name="DialogueUi" parent="." unique_id=928536291 instance=ExtResource("11_d3ub6")]
 
@@ -1982,3 +1948,12 @@ script = SubResource("GDScript_1t5oo")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="AttackTutorialTrigger" unique_id=854470848]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.19386244, 0.17907715, -0.43286133)
 shape = SubResource("BoxShape3D_ng1gw")
+
+[node name="fence" type="StaticBody3D" parent="." unique_id=857640749]
+transform = Transform3D(-5.2453668e-08, 0, 1.2, 0, 1.2, 0, -1.2, 0, -5.2453668e-08, 13.429078, 0.35016626, -4.561211)
+
+[node name="fence" parent="fence" unique_id=113642634 instance=ExtResource("12_7s2gi")]
+transform = Transform3D(0.9999998, 0, 0, 0, 0.9999998, 0, 0, 0, 0.9999998, 0.49183774, 0, 0)
+
+[node name="fence2" parent="fence" unique_id=677637863 instance=ExtResource("12_7s2gi")]
+transform = Transform3D(0.99999976, 0, 0, 0, 0.99999976, 0, 0, 0, 0.99999976, -1.4547992, 0, 0)

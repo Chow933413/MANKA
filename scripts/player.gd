@@ -18,7 +18,7 @@ signal player_died
 @onready var sprite: Sprite3D = $Sprite3D
 @onready var camera_mount = $Camera_controller
 
-const SPEED = 3.0
+const SPEED = 4.0
 const JUMP_VELOCITY = 4.5
 
 # Camera Settings
@@ -312,7 +312,6 @@ func respawn() -> void:
 	NavigationManager.saved_health_units = max_health * 2
 	current_health_units = max_health * 2
 	
-	# Fixed signature matching error block
 	health_changed.emit(current_health_units)
 	
 	state_machine.dispatch("to_idle")
@@ -322,7 +321,9 @@ func respawn() -> void:
 		NavigationManager.target_portal_id = NavigationManager.respawn_portal_id
 		NavigationManager.teleport_to_scene(NavigationManager.respawn_scene_path, NavigationManager.respawn_portal_id)
 	else:
-		get_tree().reload_current_scene()
+		# ─── CHANGED: Teleport directly to the checkpoint instead of reloading the scene ───
+		global_position = respawn_position
+		print("Player moved directly to checkpoint position: ", global_position)
 
 func _on_sword_hitbox_area_entered(area: Area3D) -> void:
 	var parent_node = area.get_parent()

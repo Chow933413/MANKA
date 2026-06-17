@@ -20,7 +20,6 @@ func init(actor: CharacterBody3D) -> void:
 func change_state(new_state_name: String) -> void:
 	var target_state = states.get(new_state_name.to_lower())
 	if not target_state:
-		print("Warning: State '", new_state_name, "' does not exist!")
 		return
 		
 	if current_state and current_state.has_method("exit"):

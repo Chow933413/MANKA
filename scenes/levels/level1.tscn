@@ -3,6 +3,8 @@
 [ext_resource type="Script" uid="uid://d2q5byxbo3v17" path="res://scripts/level_1.gd" id="1_1seuy"]
 [ext_resource type="PackedScene" uid="uid://d1e2u3fc5egv3" path="res://scenes/surrounding/portal.tscn" id="1_4tcl0"]
 [ext_resource type="PackedScene" uid="uid://bfo0cmvi43eb6" path="res://scenes/agents/player/player.tscn" id="2_dd0lh"]
+[ext_resource type="Script" uid="uid://bh7chlagdwep" path="res://scripts/watch_out.gd" id="2_jrfo0"]
+[ext_resource type="Script" uid="uid://i8ll4esa46cr" path="res://scripts/tips.gd" id="3_db1r7"]
 [ext_resource type="MeshLibrary" uid="uid://les21xne5sow" path="res://mesh_library/landscape_mesh.tres" id="3_dd0lh"]
 [ext_resource type="PackedScene" uid="uid://byb71m6xywgy4" path="res://scenes/agents/npc/witch.tscn" id="4_bfxgj"]
 [ext_resource type="PackedScene" uid="uid://cepi0m77ntr0j" path="res://scenes/GUI/Dialogue UI/DialogueUI.tscn" id="5_dywbp"]
@@ -43,6 +45,9 @@ volumetric_fog_enabled = true
 volumetric_fog_density = 0.02
 volumetric_fog_albedo = Color(0.47442824, 0.43231824, 0.7728123, 1)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_db1r7"]
+size = Vector3(1.4587402, 1.4334106, 16.10292)
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_1seuy"]
 size = Vector3(0.25, 1, 6.883209)
 
@@ -57,20 +62,37 @@ transform = Transform3D(-0.6682222, 0.42671892, -0.60941786, 1.7763568e-15, 0.81
 light_color = Color(0.77692616, 0.75817865, 0.93612444, 1)
 shadow_enabled = true
 
+[node name="WatchOut" type="Area3D" parent="." unique_id=280368983]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.4470415, 0.073051095, 0.5807396)
+script = ExtResource("2_jrfo0")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WatchOut" unique_id=1767130261]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.40429688, 0.21670532, -1.1459045)
+shape = SubResource("BoxShape3D_db1r7")
+
+[node name="Tips" type="Area3D" parent="." unique_id=674808299]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 5.4767838, 0.073051095, 0.5807396)
+script = ExtResource("3_db1r7")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Tips" unique_id=165474385]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8414307, 0.21670532, -0.16817474)
+shape = SubResource("BoxShape3D_db1r7")
+
 [node name="ExitPortal" parent="." unique_id=1711991947 groups=["LevelPortal"] instance=ExtResource("1_4tcl0")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -16.814064, 0.9247596, -1.4125172)
 visible = false
 collision_mask = 2
-target_scene = "uid://dqpbvtoslfen0"
+target_scene = "uid://7n2pe5h1iio7"
 portal_id = "Portal_1"
 target_portal_id = "Portal_2"
 is_locked = true
 
 [node name="Portal" parent="." unique_id=1616537689 instance=ExtResource("1_4tcl0")]
-transform = Transform3D(-2.1855694e-08, 0, 0.5, 0, 0.5, 0, -0.5, 0, -2.1855694e-08, 1.2238458, 1.0950809, 0.10908502)
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.2238458, 1.0950809, -0.4673978)
+portal_id = "Portal2"
 
 [node name="Player" parent="." unique_id=319351506 instance=ExtResource("2_dd0lh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1915858, 0.4341421, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1915858, 0.4341421, -0.16421723)
 
 [node name="DialogueUi" parent="." unique_id=928536291 instance=ExtResource("5_dywbp")]
 
