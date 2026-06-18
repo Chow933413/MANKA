@@ -18,6 +18,12 @@ signal player_died
 @onready var sprite: Sprite3D = $Sprite3D
 @onready var camera_mount = $Camera_controller
 
+@export_category("Sound Effects")
+@export var sound_attack: AudioStream
+@export var sound_hurt: AudioStream
+
+@onready var sfx_player: AudioStreamPlayer3D = $SoundEffects
+
 const SPEED = 4.0
 const JUMP_VELOCITY = 4.5
 
@@ -51,6 +57,11 @@ var knockback_velocity: Vector3 = Vector3.ZERO
 
 # Internal tracking for vertical mouse angle clamping
 var camera_pitch: float = 0.0
+
+func play_sfx(stream: AudioStream) -> void:
+	if stream and sfx_player:
+		sfx_player.stream = stream
+		sfx_player.play()
 
 func collect_word(new_word: String):
 	inventory.append(new_word)

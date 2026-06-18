@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bx0c3nv8dfc5o"
+path="res://.godot/imported/running on dirt.mp3-5ccdcbd54b160f16ed86f6a919355283.mp3str"
+
+[deps]
+
+source_file="res://sounds effect/running on dirt.mp3"
+dest_files=["res://.godot/imported/running on dirt.mp3-5ccdcbd54b160f16ed86f6a919355283.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

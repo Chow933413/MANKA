@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://b8mdqg7agl4u2"]
+
+[ext_resource type="Texture2D" uid="uid://cjqn4yq1f2nqj" path="res://assets/textures/cauldron UI/2205_w032_n003_479a_p1_479-Photoroom 2.png" id="1_78co6"]
+
+[node name="CraftingRow" type="TextureButton" unique_id=499449148]
+custom_minimum_size = Vector2(80, 80)
+offset_right = 80.0
+offset_bottom = 80.0
+texture_normal = ExtResource("1_78co6")
+ignore_texture_size = true
+stretch_mode = 5
+flip_v = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=959954315]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -3.0
+offset_right = -3.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer" unique_id=1930507786]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer" unique_id=1832623053]
+layout_mode = 2
+text = "fegfh"
+horizontal_alignment = 1
+vertical_alignment = 1

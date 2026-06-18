@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://bskhwsdtwjpqg"]
 
 [ext_resource type="PackedScene" uid="uid://bfo0cmvi43eb6" path="res://scenes/agents/player/player.tscn" id="1_1nvli"]
+[ext_resource type="AudioStream" uid="uid://ddqcct3fvgvs4" path="res://sounds effect/background.mp3" id="1_fj52k"]
 [ext_resource type="PackedScene" uid="uid://dqs1ke42p4dd4" path="res://scenes/entities/barrel.tscn" id="2_vals0"]
 [ext_resource type="PackedScene" uid="uid://c5l32mvgwdfdc" path="res://scenes/entities/tokens.tscn" id="3_oem7y"]
 [ext_resource type="PackedScene" uid="uid://vomajn7704yg" path="res://scenes/surrounding/cauldron.tscn" id="4_a76di"]
@@ -9,6 +10,7 @@
 [ext_resource type="MeshLibrary" uid="uid://les21xne5sow" path="res://mesh_library/landscape_mesh.tres" id="8_vals0"]
 [ext_resource type="Shader" uid="uid://batk14s1dymoq" path="res://shaders/water.tres" id="9_oem7y"]
 [ext_resource type="PackedScene" uid="uid://dqrxrpvip3rac" path="res://scenes/surrounding/sign.scn" id="10_a76di"]
+[ext_resource type="PackedScene" uid="uid://cskhqp8y766wi" path="res://scenes/GUI/MiniMap/MiniMap.tscn" id="11_1t5oo"]
 [ext_resource type="PackedScene" uid="uid://cepi0m77ntr0j" path="res://scenes/GUI/Dialogue UI/DialogueUI.tscn" id="11_d3ub6"]
 [ext_resource type="PackedScene" uid="uid://7rgrejmhneju" path="res://scenes/surrounding/fence.scn" id="12_7s2gi"]
 [ext_resource type="PackedScene" uid="uid://cde4uxu2u4kjf" path="res://scenes/Menu/FadeTransition.tscn" id="13_1t5oo"]
@@ -155,6 +157,14 @@ func _on_area_exited(area: Area3D) -> void:
 
 [node name="level 0" type="Node3D" unique_id=1730428891]
 script = SubResource("GDScript_7s2gi")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=2079589716]
+stream = ExtResource("1_fj52k")
+volume_db = -1.0
+pitch_scale = 0.8
+autoplay = true
+mix_target = 1
+parameters/looping = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=614427752]
 environment = SubResource("Environment_iky1b")
@@ -1920,6 +1930,8 @@ transform = Transform3D(0.50606376, 0, 0.862496, 0, 1, 0, -0.862496, 0, 0.506063
 invisible_border = NodePath("../fence")
 
 [node name="DialogueUi" parent="." unique_id=928536291 instance=ExtResource("11_d3ub6")]
+
+[node name="MiniMap" parent="." unique_id=1146123926 instance=ExtResource("11_1t5oo")]
 
 [node name="GridMap" type="GridMap" parent="." unique_id=2053429227]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25, 0, 0)

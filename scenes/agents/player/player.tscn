@@ -355,6 +355,9 @@ animation = &"Attack"
 
 [node name="CanvasLayer" parent="." unique_id=1186888506 instance=ExtResource("11_ujf17")]
 
+[node name="SoundEffects" type="AudioStreamPlayer3D" parent="." unique_id=53497402]
+transform = Transform3D(1, 0, 0, 0, 0.5200708, 0.8541232, 0, -0.8541232, 0.5200708, 0, 1.1222007, 1.105604)
+
 [connection signal="area_entered" from="Sword Hitbox" to="." method="_on_sword_hitbox_area_entered"]
 [connection signal="body_entered" from="Sword Hitbox" to="." method="_on_sword_hitbox_body_entered"]
 [connection signal="area_entered" from="HurtBox" to="." method="_on_hurt_box_area_entered"]

@@ -1,8 +1,9 @@
 [gd_scene format=4 uid="uid://vomajn7704yg"]
 
 [ext_resource type="Script" uid="uid://bvmh4jcscbx22" path="res://scripts/cauldron.gd" id="1_r78we"]
-[ext_resource type="PackedScene" uid="uid://bdwowdkrhtqhk" path="res://scenes/surrounding/cauldron_ui.tscn" id="2_mgb2j"]
+[ext_resource type="PackedScene" uid="uid://bpwkodft3tjk5" path="res://scenes/GUI/CauldronUI/CauldronUI.tscn" id="2_5p2eu"]
 [ext_resource type="Texture2D" uid="uid://b6tgasa6k60xu" path="res://glb/cauldron/cauldron_Image_6.jpg" id="3_5p2eu"]
+[ext_resource type="Script" uid="uid://5uuvl2kanqae" path="res://scripts/CauldronUI.gd" id="3_ujjsg"]
 [ext_resource type="Texture2D" uid="uid://dmfuub1lrgjqu" path="res://glb/cauldron/cauldron_Image_7.png" id="4_ujjsg"]
 [ext_resource type="Texture2D" uid="uid://dffkkfq241dw8" path="res://glb/cauldron/cauldron_Image_8.png" id="5_12fln"]
 [ext_resource type="Texture2D" uid="uid://6ieeb55suo2" path="res://glb/cauldron/cauldron_Image_0.jpg" id="6_8tcgf"]
@@ -118,6 +119,9 @@ data = PackedVector3Array(0.417765, -0.674943, -0.448872, 0.768586, -0.671343, -
 script = ExtResource("1_r78we")
 ui = NodePath("CauldronUI")
 
+[node name="CauldronUI" parent="." unique_id=103563297 instance=ExtResource("2_5p2eu")]
+script = ExtResource("3_ujjsg")
+
 [node name="cauldron" type="MeshInstance3D" parent="." unique_id=857978701]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 mesh = SubResource("ArrayMesh_7ar2m")
@@ -125,9 +129,6 @@ mesh = SubResource("ArrayMesh_7ar2m")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2084232094]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 shape = SubResource("ConcavePolygonShape3D_odkua")
-
-[node name="CauldronUI" parent="." unique_id=1269753639 instance=ExtResource("2_mgb2j")]
-layer = 2
 
 [node name="InteractArea" type="Area3D" parent="." unique_id=1547924128]
 

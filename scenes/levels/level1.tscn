@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://cepi0m77ntr0j" path="res://scenes/GUI/Dialogue UI/DialogueUI.tscn" id="5_dywbp"]
 [ext_resource type="Script" uid="uid://btwywtdacfkdk" path="res://scripts/trigger_line_1.gd" id="6_sbmf2"]
 [ext_resource type="PackedScene" uid="uid://c5l32mvgwdfdc" path="res://scenes/entities/tokens.tscn" id="7_2r1tl"]
+[ext_resource type="PackedScene" uid="uid://cskhqp8y766wi" path="res://scenes/GUI/MiniMap/MiniMap.tscn" id="7_6gwlt"]
 [ext_resource type="PackedScene" uid="uid://cde54ehtm172h" path="res://scenes/surrounding/WitchHut.scn" id="8_plydf"]
 [ext_resource type="PackedScene" uid="uid://dabnpdy5s8qsn" path="res://scenes/surrounding/Water.tscn" id="9_1xax6"]
 [ext_resource type="PackedScene" uid="uid://c4iv8t7xl8ajr" path="res://scenes/effects/explosionVFX.tscn" id="9_gvm5i"]
@@ -22,6 +23,7 @@
 [ext_resource type="PackedScene" uid="uid://b25shoofy7xnq" path="res://scenes/surrounding/campfire.scn" id="18_g7tkf"]
 [ext_resource type="PackedScene" uid="uid://db2uqgqe4dsst" path="res://scenes/entities/logpile.scn" id="19_4fww7"]
 [ext_resource type="PackedScene" uid="uid://cww5qfciqdpq0" path="res://scenes/entities/crates.scn" id="20_gvm5i"]
+[ext_resource type="AudioStream" uid="uid://ddqcct3fvgvs4" path="res://sounds effect/background.mp3" id="24_c2nc4"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_1xax6"]
 sky_top_color = Color(0, 0, 0, 1)
@@ -95,6 +97,8 @@ portal_id = "Portal2"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1915858, 0.4341421, -0.16421723)
 
 [node name="DialogueUi" parent="." unique_id=928536291 instance=ExtResource("5_dywbp")]
+
+[node name="MiniMap" parent="." unique_id=1146123926 instance=ExtResource("7_6gwlt")]
 
 [node name="Witch" type="Node3D" parent="." unique_id=638193057]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -13.864734, 1.4300892, -2.4970322)
@@ -7281,5 +7285,13 @@ transform = Transform3D(0.049748115, 0, -0.19371402, 0, 0.19999996, 0, 0.1937140
 
 [node name="Crates4" parent="Map/SpiderEye" unique_id=274810058 instance=ExtResource("20_gvm5i")]
 transform = Transform3D(0.08021233, 0, -0.39187497, 0, 0.4, 0, 0.39187497, 0, 0.08021233, 28.300652, 0.2488594, 19.422045)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=29478180]
+stream = ExtResource("24_c2nc4")
+volume_db = -1.0
+pitch_scale = 0.8
+autoplay = true
+mix_target = 1
+parameters/looping = true
 
 [connection signal="body_entered" from="Witch/TriggerLine1" to="." method="_on_trigger_line_1_body_entered"]

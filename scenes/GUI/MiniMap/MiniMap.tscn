@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://cskhqp8y766wi"]
+
+[ext_resource type="PackedScene" uid="uid://bbgtr00j377li" path="res://scenes/GUI/MiniMap/mapshape.tscn" id="1_gbtku"]
+[ext_resource type="Script" uid="uid://bw00twmlsl5rg" path="res://scripts/mini_map.gd" id="2_ubs17"]
+
+[node name="MiniMap" type="CanvasLayer" unique_id=1146123926]
+
+[node name="PanelContainer" parent="." unique_id=2112694995 instance=ExtResource("1_gbtku")]
+script = ExtResource("2_ubs17")
